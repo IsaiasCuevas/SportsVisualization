@@ -1,7 +1,5 @@
 <template>
-  <div class="header">
-    <h1>Header</h1>
-  </div>
+  <div class="header">Sports Visualization</div>
 </template>
 
 <script>
@@ -10,13 +8,15 @@ export default {
 };
 </script>
 
-<style scoped>
-.header h1 {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style>
+@import url("https://fonts.googleapis.com/css?family=Oswald&display=swap");
+.header {
+  font-family: "Oswald", sans-serif;
+  background-color: #71a790;
+  height: 30%;
+  font-size: 54px;
+  border-bottom: 1px solid black;
+  margin: 0 auto;
+  height: auto;
 }
 </style>

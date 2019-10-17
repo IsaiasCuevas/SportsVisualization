@@ -9,25 +9,26 @@
     :adaptive="true"
     :scrollable="true"
     :reset="true"
-    width="80%"
+    width="35%"
     height="auto"
     @before-open="beforeOpen"
     @before-close="beforeClose"
   >
-    <div class="size-modal-content">
-      <h3>
-        {{stats.event_away_team}}
-        vs
-        {{stats.event_home_team}}
-      </h3>
-      <div>{{stats.event_key}}</div>
-      <h4 style></h4>
-    </div>
+    <MatchHeader v-bind:stats="stats" />
+    <MatchContent v-bind:stats="stats" />
+    <a href="#" class="modal-button">Detailed Information</a>
   </modal>
 </template>
 <script>
+import MatchHeader from "../subcomponents/Soccer/MatchHeader";
+import MatchContent from "../subcomponents/Soccer/MatchContent";
+import Lineups from "../subcomponents/Soccer/Lineups";
 export default {
   name: "soccerStats",
+  components: {
+    MatchHeader,
+    MatchContent
+  },
   data() {
     return {};
   },
@@ -39,8 +40,8 @@ export default {
 };
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 .size-modal-content {
-  display: grid;
   padding: 10px;
   font-style: 13px;
 }
@@ -48,8 +49,34 @@ export default {
   background: rgba(0, 0, 0, 0.45);
 }
 .demo-modal-class {
-  border-radius: 5px;
-  background: #f7f7f7;
+  border-radius: 10px;
+  background: #d7dadc;
   box-shadow: 5px 5px 30px 0px rgba(46, 61, 73, 0.6);
+  height: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.modal-button {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  background: gray;
+  grid-column: 1/6;
+  text-align: center;
+  width: 100%;
+  font-size: 24px;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+}
+.modal-button:active {
+  color: black;
+  text-decoration: none;
+}
+.modal-button:visited {
+  color: black;
+  text-decoration: none;
+}
+.modal-button:hover {
+  box-shadow: 0px 5px 30px -5px rgba(46, 61, 73, 0.6);
 }
 </style>

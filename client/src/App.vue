@@ -18,6 +18,8 @@ export default {
 
 <style>
 body {
-  background-color: antiquewhite;
+  margin: 0;
+  background-color: rgb(91, 192, 150);
+  height: 100%;
 }
 </style>
