@@ -2,7 +2,7 @@
 
 Repository for CSCI 4950 Senior Project
 
-Contributors Isaias Cuevas
+Contributors: Isaias Cuevas
 
 ## Local Deployment
 
