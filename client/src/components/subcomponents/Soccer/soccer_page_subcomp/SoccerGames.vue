@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div v-if="loading" style="grid-column:2; justify-self: center; margin: 25%;">
-        <img src="../../../assets/30.gif" />
+        <img src="../../../../assets/30.gif" />
       </div>
       <div v-if="!loading" class="options">
         <div class="date">
@@ -31,8 +31,30 @@
             No Results could be found for the dates specified!
           </div>
         </div>
-        <div v-else class="card" v-bind:key="i.event_key" v-for="i in data.slice(0,selected)">
-          <div class="card-teams">
+
+        <div v-else class v-bind:key="i.event_key" v-for="i in data.slice(0,selected)">
+          <md-card class="bg" md-with-hover>
+            <md-ripple>
+              <md-card-header>
+                <div class="title">{{i.event_home_team}} vs {{i.event_away_team}}</div>
+              </md-card-header>
+
+              <md-card-content>
+                <div class="card-score" v-if="i.event_status != null">({{i.event_final_result}})</div>
+                <div v-else class="card-time">
+                  {{i.event_date}}
+                  <br />
+                  {{i.event_time}}
+                  <br />
+                </div>
+              </md-card-content>
+
+              <md-card-actions>
+                <md-button v-on:click="show(i)">Expand</md-button>
+              </md-card-actions>
+            </md-ripple>
+          </md-card>
+          <!-- <div class="card-teams">
             {{i.event_home_team}}
             <br />vs
             <br />
@@ -46,7 +68,7 @@
 
           <div class="card-button">
             <button class="myButton" v-on:click="show(i)">Expand</button>
-          </div>
+          </div>-->
         </div>
 
         <soccerStats v-bind:stats="id"></soccerStats>
@@ -56,10 +78,11 @@
 </template>
 
 <script>
+import "vue-material/dist/vue-material.css";
 import Datepicker from "vuejs-datepicker";
 import moment from "moment";
 import axios from "axios";
-import soccerStats from "../../modals/soccerStats";
+import soccerStats from "../../../modals/soccerStats";
 //import h337 from "heatmap.js";
 export default {
   name: "SoccerGames",
@@ -128,6 +151,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Varela+Round&display=swap");
+
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
@@ -138,10 +162,22 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 15px;
 }
+.bg {
+  margin: 5px;
+  background-color: #ffffff;
+}
+.title {
+  font-size: 28px;
+  text-align: center;
+}
+.card-score {
+  padding: 5px;
+  font-size: 24px;
+}
 .card {
   border-radius: 5%;
   background: #71a3a7;
-  padding: 5px;
+  padding: 15px;
   text-align: center;
   text-shadow: none;
   font-family: "Roboto", sans-serif;
@@ -159,6 +195,7 @@ export default {
   font-family: "Oswald", sans-serif;
   font-size: 30px;
   font-weight: bolder;
+  padding: 15px;
 }
 .card-time {
   grid-row: 1/2;
@@ -166,14 +203,15 @@ export default {
   font-size: 25px;
   justify-self: center;
   align-self: center;
+  text-align: center;
 }
 .card-score {
   grid-row: 1/2;
   grid-column: 2;
   font-family: "Varela Round", sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   margin-left: 25px;
-  align-self: center;
+  text-align: center;
 }
 .card-button {
   grid-row: 2/3;
@@ -186,7 +224,7 @@ export default {
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5) inset;
 }
 .options {
-  background-image: linear-gradient(to bottom, #71a790, rgb(91, 192, 150));
+  background-image: linear-gradient(to bottom, #ffffff, rgb(206, 206, 206));
   padding: 25px;
   grid-column: 1/4;
   display: grid;

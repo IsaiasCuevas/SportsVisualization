@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SoccerGames from "./subcomponents/Soccer/SoccerGames";
+import SoccerGames from "../subcomponents/Soccer/soccer_page_subcomp/SoccerGames";
 
 export default {
   name: "Soccer",

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header class="header" v-bind:title="'Sports Visualization'" />
     <router-view />
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
 <style>
 body {
   margin: 0;
-  background-color: rgb(91, 192, 150);
+  background-color: #ffffff;
   height: 100%;
 }
 </style>

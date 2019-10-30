@@ -16,13 +16,16 @@
   >
     <MatchHeader v-bind:stats="stats" />
     <MatchContent v-bind:stats="stats" />
-    <a href="#" class="modal-button">Detailed Information</a>
+    <a
+      v-if="stats.event_ft_result != null"
+      v-bind:href="'/soccer/match/' +stats.event_key"
+      class="modal-button"
+    >Detailed Information</a>
   </modal>
 </template>
 <script>
-import MatchHeader from "../subcomponents/Soccer/MatchHeader";
-import MatchContent from "../subcomponents/Soccer/MatchContent";
-import Lineups from "../subcomponents/Soccer/Lineups";
+import MatchHeader from "../subcomponents/Soccer/soccer_page_subcomp/MatchHeader";
+import MatchContent from "../subcomponents/Soccer/soccer_page_subcomp/MatchContent";
 export default {
   name: "soccerStats",
   components: {
@@ -59,7 +62,7 @@ export default {
 .modal-button {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  background: gray;
+  background-image: linear-gradient(to bottom, #ffffff, rgb(206, 206, 206));
   grid-column: 1/6;
   text-align: center;
   width: 100%;
@@ -78,5 +81,10 @@ export default {
 }
 .modal-button:hover {
   box-shadow: 0px 5px 30px -5px rgba(46, 61, 73, 0.6);
+  text-decoration: none;
+}
+.modal-button a:hover {
+  box-shadow: 0px 5px 30px -5px rgba(46, 61, 73, 0.6);
+  text-decoration: none;
 }
 </style>

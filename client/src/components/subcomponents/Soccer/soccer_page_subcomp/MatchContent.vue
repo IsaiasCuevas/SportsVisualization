@@ -24,6 +24,7 @@ export default {
 .match_content {
   grid-column: 1/6;
   border: 1px solid black;
+  background-image: linear-gradient(to bottom, #ffffff, rgb(206, 206, 206));
   padding: 15px;
 }
 .stat-type {
