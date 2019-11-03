@@ -5,6 +5,7 @@ import Soccer from "./components/page_components/Soccer";
 import Soccer_Team from "./components/page_components/Soccer_Team";
 import Soccer_Match_Page from "./components/page_components/Soccer_Match_Page";
 import EsportsLanding from "./components/page_components/EsportsLanding";
+import Soccer_PlayerCompare from "./components/page_components/Soccer_PlayerCompare"
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
       path: "/esports",
       name: "esports_landing",
       component: EsportsLanding
+    },
+    {
+      path: "/soccer/team/:teamid/players",
+      name: "team_page",
+      component: Soccer_PlayerCompare
     }
   ]
 });

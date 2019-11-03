@@ -29,7 +29,7 @@
         <h1 class="header_team">
           <a
             class="home_team_link"
-            v-bind:href="'/soccer/team/' +stats.home_team_key"
+            v-bind:href="'/soccer/team/' +stats.away_team_key"
           >{{stats.event_away_team}}</a>
         </h1>
         <ul class="away_goals">
@@ -130,6 +130,7 @@ export default {
   grid-row: 2;
   grid-column: 2/7;
   display: grid;
+  margin-bottom: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   border: 1px solid black;
 }
@@ -137,22 +138,20 @@ export default {
   background: #ffffff;
   border: none;
   grid-column: 3/5;
-  padding: 10px;
+  padding: 15px;
   font-size: 20px;
 }
 .lineup_stat_button {
   background: #ffffff;
-  border: none;
+
   grid-column: 1/3;
   font-size: 20px;
-  padding: 10px;
+  padding: 15px;
 }
 .stats_stat_button:hover {
-  border: none;
   background-color: lightgray;
 }
 .lineup_stat_button:hover {
-  border: none;
   background-color: lightgray;
 }
 .selected_button {

@@ -1,13 +1,6 @@
 <template>
-  <div class>
-    <div
-      v-if="player1.player_name != '' && player2.player_name != ''"
-      style="text-align: center; justify-self: center; font-size: 24px;"
-    >
-      <a v-bind:href="'/soccer/team/' + id + '/players'">View in depth analysis</a>
-    </div>
-
-    <div class="player1">
+  <div class="compare-container">
+    <div class="player1" v-if="player1.player_name != ''">
       <img
         v-if="player1.player_name != ''"
         src="../../../../assets/player.png"
@@ -70,7 +63,7 @@
         v-bind:class="player1.player_red_cards > player2.player_red_cards ? 'underline-text' : 'no-underline'"
       >{{player2.player_red_cards}}</div>
     </div>
-    <div class="player2">
+    <div class="player2" v-if="player1.player_name != ''">
       <img
         v-if="player2.player_name != ''"
         src="../../../../assets/player.png"
@@ -92,17 +85,54 @@
         </slide>
       </carousel>
     </div>
+    <PlayerCompareChart
+      v-if="player1.player_name != '' && player2.player_name != ''"
+      v-bind:p1="player1"
+      v-bind:p2="player2"
+    />
+
+    <div class="first-chart">
+      <PlayerCompareStats1
+        v-if="player1.player_name != '' && player2.player_name != ''"
+        v-bind:p1="player1"
+        v-bind:p2="player2"
+      />
+    </div>
+    <div class="second-chart">
+      <PlayerCompareStats2
+        v-if="player1.player_name != '' && player2.player_name != ''"
+        v-bind:p1="player1"
+        v-bind:p2="player2"
+      />
+    </div>
+    <div class="third-chart">
+      <PlayerCompareStats3
+        v-if="player1.player_name != '' && player2.player_name != ''"
+        v-bind:p1="player1"
+        v-bind:p2="player2"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import VueApexCharts from "vue-apexcharts";
+import PlayerCompareChart from "./player_comapre_chart";
+import PlayerCompareStats1 from "./player_compare_stats1";
+import PlayerCompareStats2 from "./player_compare_stats2";
+import PlayerCompareStats3 from "./player_compare_stats3";
 
 export default {
-  name: "PlayerCompare",
+  name: "PlayerCompareExt",
   components: {
     Carousel,
-    Slide
+    Slide,
+    apexchart: VueApexCharts,
+    PlayerCompareChart,
+    PlayerCompareStats1,
+    PlayerCompareStats2,
+    PlayerCompareStats3
   },
   data() {
     return {
@@ -110,7 +140,8 @@ export default {
       player2: { player_name: "" }
     };
   },
-  props: ["team", "img_url", "id"],
+
+  props: ["team", "img_url"],
   methods: {
     selectPlayers: function(player) {
       if (this.player1.player_name == "") {
@@ -131,14 +162,16 @@ export default {
 </script>
 
 <style >
-.player_compare {
+.compare-container {
+}
+.player_compare-ext {
   font-family: "Oswald", sans-serif;
   grid-column: 2/6;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-
+  grid-template-rows: 0.5fr 0.5fr 0.5fr 1fr;
   margin: 0;
+  margin-top: 5px;
 
   border-radius: 5px;
   box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
@@ -153,6 +186,10 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 
   margin: 0;
+}
+.advanced_stats {
+  grid-row: 3;
+  grid-column: 1/5;
 }
 .card2 {
   border-radius: 5%;
@@ -203,12 +240,11 @@ export default {
   font-size: 2em;
   justify-self: center;
   width: 80%;
-  height: 80%;
+  height: calc(100% - 50px);
   border-radius: 2%;
   background-color: #e8eff8;
   text-align: center;
   margin-top: 5%;
-  padding-bottom: 1em;
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0.5 1px 1px -1px rgba(0, 0, 0.5, 0.3) inset;
@@ -227,8 +263,7 @@ export default {
   display: grid;
   text-align: center;
   grid-template-columns: 0.75fr 1.75fr 0.75fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1.25fr;
-  padding: 0;
+  grid-template-rows: 1.25fr 1fr 1.25fr 1fr 1.25fr;
   margin-bottom: 10px;
 }
 .p1_num {
@@ -256,7 +291,7 @@ export default {
   color: #fff;
   font-family: Arial;
   font-size: 24px;
-
+  padding-bottom: 36px;
   margin: auto;
 }
 .VueCarousel-navigation {
@@ -267,16 +302,27 @@ export default {
   padding: 0;
   height: 0;
 }
+
 .VueCarousel-navigation-button[data-v-453ad8cd] {
   top: 35%;
 }
 .align_center {
   align-self: center;
+  grid-column: 2;
 }
 .underline-text {
   text-decoration: underline;
   font-size: 18px;
   color: black;
   text-shadow: 2px 2px 2px 1px black;
+}
+.first-chart {
+  grid-row: 4;
+}
+.second-chart {
+  grid-row: 4;
+}
+.third-chart {
+  grid-row: 4;
 }
 </style>

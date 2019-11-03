@@ -77,7 +77,7 @@ export default {
       ],
       GoalAttempts: {
         chart: {
-          background: "#ffffff",
+          background: "#f0f2f5",
           stacked: true,
 
           toolbar: {
@@ -103,6 +103,7 @@ export default {
         },
         grid: {
           xaxis: {
+            show: false,
             showLines: false
           },
           labels: {
@@ -160,7 +161,7 @@ export default {
       ],
       ShotsOnGoal: {
         chart: {
-          background: "#ffffff",
+          background: "#f0f2f5",
           stacked: true,
 
           toolbar: {
@@ -255,7 +256,7 @@ export default {
         parseFloat(this.match.statistics[0].away) / 100.0
       ],
       donutchartOptions: {
-        background: "#fff",
+        background: "#f0f2f5",
         colors: ["#252525", "#de9a35"],
         title: {
           text: this.match.statistics[0].type,
@@ -296,7 +297,7 @@ export default {
   grid-column: 2/7;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.01fr 0.1fr 0.5fr;
+  grid-template-rows: 0.01fr 0.05fr 0.5fr;
   margin: 0;
   background-color: #ffffff;
 }
@@ -304,8 +305,8 @@ export default {
   grid-row: 3;
   grid-column: 1/7;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.25fr 0.01fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.25fr;
   margin: 0;
   background-color: #ffffff;
 }
@@ -332,12 +333,12 @@ export default {
   margin: 5px;
   padding: 5px;
   grid-row: 1;
-  grid-column: 5;
-  border-radius: 5px;
-  box-shadow: 0 3px 1px 1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 1px 3px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0 1px 1px 2px rgba(0, 0, 0.5, 0.3) inset;
-  -webkit-box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.3) inset;
+  grid-column: 6;
+  border-radius: 10px;
+  box-shadow: 1px 3px 1px 1px rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 1px 1px 1px 2px rgba(0, 0, 0.5, 0.3) inset;
+  -webkit-box-shadow: 2px 1px 2px 1.5px rgba(0, 0, 0, 0.3) inset;
 }
 .red {
   background-color: red;
@@ -359,7 +360,7 @@ export default {
 .stat-comparison {
   display: grid;
   grid-template-columns: 0.5fr 0.5fr 0.5fr;
-  background-color: #ffffff;
+  background-color: #f0f2f5;
 }
 .stat-comparison-home {
   text-align: center;
@@ -384,7 +385,7 @@ export default {
 .card-stat-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: #ffffff;
+  background: #f0f2f5;
 }
 .timeline {
   grid-row: 1;

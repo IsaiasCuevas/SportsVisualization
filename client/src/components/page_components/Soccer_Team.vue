@@ -14,6 +14,7 @@
         class="player_compare"
         v-bind:team="cards"
         v-bind:img_url="team_img_link"
+        v-bind:id="teamid"
         v-if="!loading"
       />
       <div class="table" v-if="!loading">

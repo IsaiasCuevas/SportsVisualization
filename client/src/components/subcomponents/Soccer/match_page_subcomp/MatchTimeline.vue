@@ -36,7 +36,7 @@
       </li>
       <li
         class="start-end"
-        :style="{position: 'relative', left: '84%'} "
+        :style="{position: 'relative', left: '85%'} "
         v-tooltip="{ content: 'Game End' }"
       >
         <img src="../../../../assets/whistle.png" alt />
@@ -79,6 +79,7 @@ export default {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  padding: 5px;
 }
 .timeline li {
   float: left;
