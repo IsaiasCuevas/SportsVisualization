@@ -4,7 +4,7 @@
       style="text-align: center; font-size: 32px;"
       v-if="this.p1.player_goals == '0' && this.p2.player_goals == '0'"
     >Neither players have scored a Goal</p>
-    <apexchart v-else type="pie" height="500" :options="chartOptions" :series="series" />
+    <apexchart v-else type="pie" height="400" :options="chartOptions" :series="series" />
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
         },
         colors: ["#252525", "#e3a953"],
         legend: {
-          fontSize: "20px"
+          fontSize: "18px"
         }
       }
     };
@@ -65,6 +65,6 @@ export default {
 
 <style>
 .advanced_stats {
-  padding: 10px;
+  padding: 25px;
 }
 </style>

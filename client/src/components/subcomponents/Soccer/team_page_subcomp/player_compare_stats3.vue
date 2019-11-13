@@ -4,7 +4,7 @@
       style="text-align: center; font-size: 32px;"
       v-if="this.p1.player_red_cards == '0' && this.p2.player_red_cards == '0'"
     >Neither players have recieved a Red Card</p>
-    <apexchart v-else type="pie" height="500" :options="chartOptions" :series="series" />
+    <apexchart v-else type="pie" height="400" :options="chartOptions" :series="series" />
   </div>
 </template>
 

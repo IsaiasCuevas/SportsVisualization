@@ -130,16 +130,14 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .player_compare {
   font-family: "Oswald", sans-serif;
   grid-column: 2/6;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-
   margin: 0;
-
   border-radius: 5px;
   box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
@@ -244,7 +242,7 @@ export default {
 .VueCarousel {
   grid-column: 1/6;
   grid-row: 1;
-  height: 80%;
+  height: 100%;
   padding: 0;
   width: calc(100% - 50px);
   margin: 0 auto;
@@ -253,11 +251,13 @@ export default {
   grid-column: 1/6;
   display: grid;
   grid-template-rows: 150px, 25px, 25px;
-  color: #fff;
+
   font-family: Arial;
   font-size: 24px;
-
-  margin: auto;
+  height: 100%;
+  margin: none;
+  padding: 10px;
+  border: none;
 }
 .VueCarousel-navigation {
   padding: 0;

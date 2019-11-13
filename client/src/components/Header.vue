@@ -4,6 +4,7 @@
       <a id="smallLinkButton" href="/">{{title}}</a>
       <a id="navlink" href="/soccer">Soccer</a>
       <a id="navlink" href="#">Basketball</a>
+      <a id="navlink" href="/esports">Esports</a>
     </nav>
   </div>
 </template>

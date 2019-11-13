@@ -7,6 +7,8 @@ import VTooltip from "v-tooltip";
 
 import VueMaterial from "vue-material";
 
+export const bus = new Vue();
+
 Vue.use(VModal, { dialog: true });
 Vue.use("apexchart", VueApexCharts);
 Vue.use(VueMaterial);

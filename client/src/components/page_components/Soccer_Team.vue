@@ -54,6 +54,7 @@
 
 <script>
 import axios from "axios";
+import "vue-material/dist/vue-material.css";
 import TeamPageHeader from "../subcomponents/Soccer/team_page_subcomp/team_page_header";
 import PlayerCompare from "../subcomponents/Soccer/team_page_subcomp/player_compare";
 export default {

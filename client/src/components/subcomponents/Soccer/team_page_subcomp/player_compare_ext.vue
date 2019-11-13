@@ -73,7 +73,7 @@
       {{player2.player_name}}
     </div>
     <div class="player_chooser">
-      <carousel :navigationEnabled="true" :paginationEnabled="false" :perPage="6">
+      <carousel :navigationEnabled="true" :paginationEnabled="false" :perPage="5">
         <slide v-bind:key="index + 'player'" v-for="(players, index) in team">
           <slide>
             <div class="card2" v-on:click="selectPlayers(team[index])">
@@ -161,7 +161,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .compare-container {
 }
 .player_compare-ext {
@@ -279,10 +279,11 @@ export default {
 .VueCarousel {
   grid-column: 1/6;
   grid-row: 1;
-  height: 80%;
+  height: 100%;
   padding: 0;
   width: calc(100% - 50px);
   margin: 0 auto;
+  padding: 15px;
 }
 .VueCarousel-slide {
   grid-column: 1/6;
@@ -292,7 +293,10 @@ export default {
   font-family: Arial;
   font-size: 24px;
   padding-bottom: 36px;
-  margin: auto;
+  height: 100%;
+  margin: none;
+  padding: 10px;
+  border: none;
 }
 .VueCarousel-navigation {
   padding: 0;

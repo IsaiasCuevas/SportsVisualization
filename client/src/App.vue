@@ -17,6 +17,17 @@ export default {
 </script>
 
 <style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --accent-color: #641bff;
+  --heading-font-family: "Poppins", sans-serif;
+  --body-font-family: "Lato", sans-serif;
+}
 body {
   margin: 0;
   background-color: #ffffff;
