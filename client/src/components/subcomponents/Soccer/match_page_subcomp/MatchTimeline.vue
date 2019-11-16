@@ -92,7 +92,11 @@ export default {
   border-radius: 10px;
   padding: 5px 10px 4px;
 }
-.point img {
+.timeline .point img {
+  margin-top: 8px;
+  height: 14px;
+}
+.timeline .start-end img {
   margin-top: 8px;
   height: 14px;
 }

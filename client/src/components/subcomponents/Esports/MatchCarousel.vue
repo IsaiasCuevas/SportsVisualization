@@ -55,6 +55,7 @@ export default {
     },
     setID: function(newID) {
       bus.$emit("changeID", newID);
+      bus.$emit("changeIDs", newID);
     }
   },
   created() {

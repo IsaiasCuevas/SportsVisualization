@@ -22,14 +22,11 @@
 import { bus } from "../../main";
 import MatchCarousel from "../subcomponents/Esports/MatchCarousel";
 import MatchInfo from "../subcomponents/Esports/MatchInfo";
-import CSGOSchedule from "../subcomponents/Esports/CSGO/CSGOSched";
-import axios from "axios";
 export default {
   name: "EsportsLanding",
   components: {
     MatchCarousel,
-    MatchInfo,
-    CSGOSchedule
+    MatchInfo
   },
   data() {
     return {
@@ -43,7 +40,6 @@ export default {
       this.id = newID;
     },
     getTeams: function() {
-      console.log("hi");
       bus.$emit("getTeams");
     }
   }
@@ -53,7 +49,7 @@ export default {
 <style scoped>
 .esports-page {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.75fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 180px;
 }
 .matchInfoContainer {
@@ -63,6 +59,7 @@ export default {
 .side-nav {
   grid-column: 1;
   grid-row: 2;
+  background: #ffffff;
 }
 .side-nav ul {
   list-style-type: none;

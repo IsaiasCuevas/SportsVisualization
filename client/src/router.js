@@ -42,11 +42,6 @@ export default new Router({
       path: "/soccer/team/:teamid/players",
       name: "player_compare_page",
       component: Soccer_PlayerCompare
-    },
-    {
-      path: "/giner",
-      name: "sched",
-      component: CSGOSched
     }
   ]
 });

@@ -31,6 +31,5 @@ export default {
 body {
   margin: 0;
   background-color: #ffffff;
-  height: 100%;
 }
 </style>
