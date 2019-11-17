@@ -1,6 +1,6 @@
 <template>
   <div class="match-info">
-    <img v-if="loading" src="../../../assets/30.gif" alt />
+    <img v-if="loading" class="loading" src="../../../assets/30.gif" alt />
     <div v-if="teams && !loading">
       <md-table v-model="team_data" md-card @md-selected="onSelect">
         <md-table-row
@@ -129,6 +129,7 @@ export default {
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
   grid-template-rows: 15% 0.25fr 1.5fr;
+  border-bottom: 1px solid black;
 }
 .map-list {
   grid-row: 2;
@@ -143,6 +144,7 @@ export default {
   align-self: center;
   display: grid;
   grid-template-rows: 1fr 1fr;
+  padding: 10px;
 }
 .away-team-header {
   font-size: 24px;
@@ -152,6 +154,7 @@ export default {
   align-self: center;
   display: grid;
   grid-template-rows: 1fr 1fr;
+  padding: 10px;
 }
 .game_stats {
   grid-row: 3;
@@ -163,14 +166,19 @@ export default {
 }
 .win {
   color: green;
+  font-size: 18px;
 }
 .lose {
   color: red;
+  font-size: 18px;
 }
 .score {
   grid-row: 2;
   justify-self: center;
   margin: 10px;
+  font-size: 28px;
+  padding-top: 25px;
+
 }
 .event_info {
   grid-row: 1;
@@ -181,6 +189,13 @@ export default {
   align-self: end;
 }
 .csgo_team_name {
+  font-size: 42px;
   margin-top: 25px;
+}
+.loading{
+  text-align: center;
+  justify-self: center;
+  padding-left: 45%;
+  padding-top: 25%;
 }
 </style>
