@@ -13,24 +13,48 @@
           <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
         </md-table-row>
       </md-table>
+      <a
+        :href="'/esports/team/'+ selected[0].id + '/' + selected[1].id"
+        v-if="selected.length == 2"
+      >Compare Teams</a>
+      <span>You must have ONLY two selected teams to compare them.</span>
     </div>
+
     <div v-if="!teams && !loading">
       <div class="cs-match-container">
         <div class="home-team-header">
-          <span
-            class="csgo_team_name"
-          >{{page_data.data.competitors[0].name ? page_data.data.competitors[0].name : 'Uknown'}}</span>
-          <span
-            v-bind:class="page_data.sport.home_score > page_data.sport.away_score ? 'win score' : 'lose score' "
-          >{{page_data.sport.home_score}}</span>
+          <div style="justify-self: center;">
+            <img :src="'https://ls.sportradar.com/ls/crest/big/'+ homeid +'.png'" />
+          </div>
+          <div style="align-self: center;">
+            <span
+              class="csgo_team_name"
+            >{{page_data.data.competitors[0].name ? page_data.data.competitors[0].name : 'Uknown'}}</span>
+          </div>
+
+          <div style="justify-self: center;">
+            <span
+              v-bind:class="page_data.sport.home_score > page_data.sport.away_score ? 'win score' : 'lose score' "
+            >{{page_data.sport.home_score}}</span>
+          </div>
         </div>
         <div class="away-team-header">
-          <span
-            class="csgo_team_name"
-          >{{page_data.data.competitors[1].name ? page_data.data.competitors[1].name : 'Uknown'}}</span>
-          <span
-            v-bind:class="page_data.sport.away_score > page_data.sport.home_score ? 'win score' : 'lose score' "
-          >{{page_data.sport.away_score}}</span>
+          <div style="justify-self: center;">
+            <img
+              style="justify-self: center;"
+              :src="'https://ls.sportradar.com/ls/crest/big/'+ awayid +'.png'"
+            />
+          </div>
+          <div style="align-self: center;">
+            <span
+              class="csgo_team_name"
+            >{{page_data.data.competitors[1].name ? page_data.data.competitors[1].name : 'Uknown'}}</span>
+          </div>
+          <div style="justify-self: center;">
+            <span
+              v-bind:class="page_data.sport.away_score > page_data.sport.home_score ? 'win score' : 'lose score' "
+            >{{page_data.sport.away_score}}</span>
+          </div>
         </div>
 
         <ul class="map-list">
@@ -74,7 +98,9 @@ export default {
       page_data: [{ statistics: {} }],
       team_data: null,
       teams: false,
-      loading: false
+      loading: false,
+      homeid: null,
+      awayid: null
     };
   },
   //Will listen for events to be triggered on the bus and will react accordingly.
@@ -86,6 +112,13 @@ export default {
       try {
         const res = await axios.get(`/api/esports/match/${data}`);
         this.page_data = res.data;
+        const homeid = this.page_data.data.competitors[0].id;
+        const awayid = this.page_data.data.competitors[1].id;
+        const hid = homeid.split(":");
+        const aid = awayid.split(":");
+        this.homeid = hid[2];
+        this.awayid = aid[2];
+
         this.loading = false;
       } catch (err) {
         this.loading = false;
@@ -107,6 +140,9 @@ export default {
   methods: {
     onSelect(items) {
       this.selected = items;
+    },
+    matchPage(team1id, team2id) {
+      this.$route.router.go("/");
     }
   }
 };
@@ -125,11 +161,10 @@ export default {
   -webkit-box-shadow: 0px 1px 1px 2px rgba(0, 0, 0, 0.3) inset;
 }
 .cs-match-container {
-  background: #ffffff;
+  background: #f3f3f3;
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 0.5fr;
-  grid-template-rows: 15% 0.25fr 1.5fr;
-  border-bottom: 1px solid black;
+  grid-template-rows: auto;
 }
 .map-list {
   grid-row: 2;
@@ -143,8 +178,9 @@ export default {
   justify-self: center;
   align-self: center;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  padding: 10px;
+  grid-template-rows: 1fr 0.75fr 0.3fr;
+  grid-gap: 5px;
+  margin-top: 25px;
 }
 .away-team-header {
   font-size: 24px;
@@ -153,8 +189,7 @@ export default {
   justify-self: center;
   align-self: center;
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  padding: 10px;
+  grid-template-rows: 1fr 0.75fr 0.3fr;
 }
 .game_stats {
   grid-row: 3;
@@ -163,6 +198,7 @@ export default {
 .map_image {
   height: 100px;
   width: 200px;
+  margin-top: 25px;
 }
 .win {
   color: green;
@@ -178,7 +214,7 @@ export default {
   margin: 10px;
   font-size: 28px;
   padding-top: 25px;
-
+  margin-bottom: 10px;
 }
 .event_info {
   grid-row: 1;
@@ -191,11 +227,16 @@ export default {
 .csgo_team_name {
   font-size: 42px;
   margin-top: 25px;
+  padding-left: 5px;
+  justify-self: center;
 }
-.loading{
+.loading {
   text-align: center;
   justify-self: center;
   padding-left: 45%;
   padding-top: 25%;
+}
+.md-content.md-theme-default {
+  background-color: #ececec !important;
 }
 </style>

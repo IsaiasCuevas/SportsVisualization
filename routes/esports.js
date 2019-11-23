@@ -4,12 +4,13 @@ const fetch = require("node-fetch");
 
 //Gets the current date and formats it to fit the requirements for the api.
 const date = moment().format("YYYY-MM-DD");
+const defaultDate = "2019-11-08";
 
 //Get route to fetch CSGO results for the current date
 router.get("/", async (req, res) => {
   try {
     const response = await fetch(
-      `http://api.sportradar.us/csgo-t1/en/schedules/2019-11-08/results.json?api_key=${process.env.CSGO_API_KEY}`
+      `http://api.sportradar.us/csgo-t1/en/schedules/${defaultDate}/results.json?api_key=${process.env.CSGO_API_KEY}`
     );
     const data = await response.json();
     const arr = data.results;
@@ -147,7 +148,7 @@ router.get("/teams", async (req, res) => {
         ent.name == "Evil Geniuses" ||
         ent.name == "Team Vitality" ||
         ent.name == "Fnatic" ||
-        ent.name == "Faze" ||
+        ent.name == "Faze Clan" ||
         ent.name == "Natus Vincere" ||
         ent.name == "Furia Esports" ||
         ent.name == "Mibr" ||
@@ -161,4 +162,5 @@ router.get("/teams", async (req, res) => {
     console.log(err);
   }
 });
+
 module.exports = router;

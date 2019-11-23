@@ -11,8 +11,6 @@
       <ul>
         <li>Home</li>
         <li v-on:click="getTeams()">Teams</li>
-        <li>asd</li>
-        <li>asd</li>
       </ul>
     </div>
   </div>

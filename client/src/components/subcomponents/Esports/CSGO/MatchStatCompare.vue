@@ -20,15 +20,21 @@
                   md-auto-select
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
-                  <md-table-cell md-label="IGN">{{
+                  <md-table-cell md-label="IGN">
+                    {{
                     item.nickname
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Kills">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Kills">
+                    {{
                     item.statistics.kills
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Deaths">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Deaths">
+                    {{
                     item.statistics.deaths
-                  }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                 </md-table-row>
               </md-table>
               <md-table
@@ -43,15 +49,21 @@
                   md-auto-select
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
-                  <md-table-cell md-label="IGN">{{
+                  <md-table-cell md-label="IGN">
+                    {{
                     item.nickname
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Kills">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Kills">
+                    {{
                     item.statistics.kills
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Deaths">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Deaths">
+                    {{
                     item.statistics.deaths
-                  }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                 </md-table-row>
               </md-table>
             </md-tab>
@@ -74,15 +86,21 @@
                   md-auto-select
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
-                  <md-table-cell md-label="IGN">{{
+                  <md-table-cell md-label="IGN">
+                    {{
                     item.nickname
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Kills">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Kills">
+                    {{
                     item.statistics.kills
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Deaths">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Deaths">
+                    {{
                     item.statistics.deaths
-                  }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                 </md-table-row>
               </md-table>
               <md-table
@@ -97,15 +115,21 @@
                   md-auto-select
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
-                  <md-table-cell md-label="IGN">{{
+                  <md-table-cell md-label="IGN">
+                    {{
                     item.nickname
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Kills">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Kills">
+                    {{
                     item.statistics.kills
-                  }}</md-table-cell>
-                  <md-table-cell md-label="Deaths">{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="Deaths">
+                    {{
                     item.statistics.deaths
-                  }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                 </md-table-row>
               </md-table>
             </md-tab>
@@ -114,7 +138,12 @@
       </div>
 
       <div class="csgo-chart" v-if="away_player != null && home_player != null">
-        <RadarChart v-bind:away="away_player" v-bind:home="home_player" />
+        <RadarChart
+          v-bind:away="away_player"
+          v-bind:home="home_player"
+          v-bind:aplayer_id="away_player_id"
+          v-bind:hplayer_id="home_player_id"
+        />
       </div>
     </div>
   </div>
@@ -135,6 +164,8 @@ export default {
     return {
       home_player: null,
       away_player: null,
+      home_player_id: null,
+      away_player_id: null,
       match_data: null,
       map_stats: null,
       loading: false
@@ -154,9 +185,15 @@ export default {
   methods: {
     onSelect(items) {
       this.home_player = items;
+      const homeID = items.id;
+      const id = homeID.split(":");
+      this.home_player_id = id[2];
     },
     onSelect2(items) {
       this.away_player = items;
+      const awayID = items.id;
+      const id = awayID.split(":");
+      this.away_player_id = id[2];
     }
   }
 };
@@ -171,9 +208,7 @@ export default {
 .tables {
   grid-column: 1/3;
 }
-.csgo-chart{
+.csgo-chart {
   grid-column: 1/3;
-
-
 }
 </style>
