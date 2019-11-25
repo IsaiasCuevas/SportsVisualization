@@ -58,6 +58,7 @@ export default {
   grid-column: 1;
   grid-row: 2;
   background: #ffffff;
+  cursor: pointer;
 }
 .side-nav ul {
   list-style-type: none;

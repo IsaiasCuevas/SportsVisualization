@@ -41,6 +41,7 @@
           </ul>
         </div>
       </div>
+      {{ home.statistics.trend }}
       <apexchart
         class="RadarChart"
         type="radar"

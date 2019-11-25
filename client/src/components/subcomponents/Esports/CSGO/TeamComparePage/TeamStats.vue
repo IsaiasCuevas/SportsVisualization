@@ -13,6 +13,30 @@
         :options="specificchartOptions"
         :series="specificseries"
       />
+      <h2>Recent Matches</h2>
+      <h2></h2>
+      <div v-bind:key="index + 'game'" v-for="(game, index) in results">
+        <md-card md-with-hover>
+          <md-ripple>
+            <md-card-header>
+              <div class="md-title">
+                <img
+                  class="card-pic"
+                  :src="getTeamPicture(game.sport_event.competitors[0].id)"
+                />{{ game.sport_event.competitors[0].name }} vs
+                {{ game.sport_event.competitors[1].name }}
+                <img
+                  :src="getTeamPicture(game.sport_event.competitors[1].id)"
+                />
+              </div>
+              <div class="md-subhead-update">
+                ({{ game.sport_event_status.home_score }} -
+                {{ game.sport_event_status.away_score }})
+              </div>
+            </md-card-header>
+          </md-ripple>
+        </md-card>
+      </div>
     </div>
   </div>
 </template>
@@ -21,9 +45,15 @@
 import VueApexCharts from "vue-apexcharts";
 export default {
   name: "TeamStats",
-  props: ["stats"],
+  props: ["stats", "results"],
   components: {
     apexchart: VueApexCharts
+  },
+  methods: {
+    getTeamPicture: function(id) {
+      const idArr = id.split(":");
+      return "https://ls.sportradar.com/ls/crest/big/" + idArr[2] + ".png";
+    }
   },
   data() {
     return {
@@ -195,5 +225,16 @@ export default {
 .asd {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+.md-subhead-update {
+  font-size: 18px;
+  margin-left: 45%;
+}
+.md-title {
+  text-align: center;
+}
+.md-title img {
+  height: 50px;
+  padding: 0px 5px 5px 0px;
 }
 </style>

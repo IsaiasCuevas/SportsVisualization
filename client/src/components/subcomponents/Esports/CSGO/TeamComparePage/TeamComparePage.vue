@@ -1,8 +1,84 @@
 <template>
   <div>
     <div class="team_compare_page">
+      <md-button class="md-primary md-raised matchupbutton" @click="getH2H()"
+        >Team Matchups
+      </md-button>
+
       <div class="back-button">
         <button v-on:click="goBack" v-if="team1 && team2">Back</button>
+      </div>
+      <div>
+        <md-dialog :md-active.sync="showDialog">
+          <md-dialog-title class="modhead">
+            <img :src="getTeamPicture(team1.team.id)" />
+            <span class="modal-team-name"
+              >{{ team1.team.name }} <span style="font-size: 20px;"> vs </span>
+              {{ team2.team.name }}</span
+            >
+            <img :src="getTeamPicture(team2.team.id)" />
+          </md-dialog-title>
+          <div class="matchup-charts">
+            <ModalCharts
+              class="modal-charts-comp"
+              v-bind:team1="team1.statistics.team"
+              v-bind:team2="team2.statistics.team"
+            />
+          </div>
+
+          <div class="matchup-modal">
+            <div
+              v-bind:key="index + 'h2h'"
+              v-for="(match, index) in h2h_results"
+            >
+              <md-card md-with-hover>
+                <md-card-header>
+                  <div class="md-title-date">
+                    {{ match.sport_event.scheduled }}
+                  </div>
+                  <div class="md-title-tname">
+                    {{ match.sport_event.tournament.name }}
+                  </div>
+                </md-card-header>
+                <md-card-header>
+                  <div class="md-title">
+                    {{ team1.team.name }}
+                    <span
+                      v-bind:class="
+                        match.sport_event_status.home_score >
+                        match.sport_event_status.away_score
+                          ? 'win_color'
+                          : 'lose_color'
+                      "
+                    >
+                      {{ match.sport_event_status.home_score }}
+                    </span>
+                    -
+
+                    <span
+                      v-bind:class="
+                        match.sport_event_status.home_score <
+                        match.sport_event_status.away_score
+                          ? 'win_color'
+                          : 'lose_color'
+                      "
+                      >{{ match.sport_event_status.away_score }}</span
+                    >
+                    {{ team2.team.name }}
+                  </div>
+                </md-card-header>
+
+                <md-card-content> </md-card-content>
+              </md-card>
+            </div>
+          </div>
+
+          <md-dialog-actions>
+            <md-button class="md-primary" @click="showDialog = false"
+              >Close</md-button
+            >
+          </md-dialog-actions>
+        </md-dialog>
       </div>
       <div class="team-compare-container">
         <div class="team_compare_home_title" v-if="team1">
@@ -12,11 +88,12 @@
           <div class="team_title">
             {{ team1.team.name }}
           </div>
-          <div class="team_choose_button" v-on:click="setTeam1Stats()">
-            <a>Stats</a>
-          </div>
+
           <div class="team_choose_button" v-on:click="setTeam1Roster()">
             <a>Roster</a>
+          </div>
+          <div class="team_choose_button" v-on:click="setTeam1Stats()">
+            <a>Stats</a>
           </div>
         </div>
         <div class="team_compare_home_info" v-if="team1_roster">
@@ -34,7 +111,10 @@
         </div>
 
         <div class="team_compare_home_info" v-if="team1_stats">
-          <TeamStats v-bind:stats="team1.statistics.team" />
+          <TeamStats
+            v-bind:stats="team1.statistics.team"
+            v-bind:results="team1_results"
+          />
         </div>
         <div class="team_compare_away_title" v-if="team2">
           <div class="team_image">
@@ -42,11 +122,11 @@
           </div>
           <div class="team_title">{{ team2.team.name }}</div>
 
-          <div class="team_choose_button" v-on:click="setTeam2Stats()">
-            <a>Stats</a>
-          </div>
           <div class="team_choose_button" v-on:click="setTeam2Roster()">
             <a>Roster</a>
+          </div>
+          <div class="team_choose_button" v-on:click="setTeam2Stats()">
+            <a>Stats</a>
           </div>
         </div>
         <div class="team_compare_away_info" v-if="team2_roster">
@@ -63,7 +143,10 @@
           </div>
         </div>
         <div class="team_compare_away_info" v-if="team2_stats">
-          <TeamStats v-bind:stats="team2.statistics.team" />
+          <TeamStats
+            v-bind:stats="team2.statistics.team"
+            v-bind:results="team2_results"
+          />
         </div>
       </div>
       <div class="highlighted-player1">
@@ -71,19 +154,19 @@
           <md-card-header>
             <md-card-header-text>
               <div class="md-title">{{ team1currentplayer.nickname }}</div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team1currentplayer.statistics.maps_played }} Maps Played
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team1currentplayer.statistics.maps_won }} Maps Won
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team1currentplayer.statistics.maps_lost }} Maps Lost
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team1currentplayer.statistics.kills }} Total Kills
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team1currentplayer.statistics.deaths }}Total Deaths
               </div>
             </md-card-header-text>
@@ -102,20 +185,20 @@
           <md-card-header>
             <md-card-header-text>
               <div class="md-title">{{ team2currentplayer.nickname }}</div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team2currentplayer.statistics.maps_played }} Maps Played
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team2currentplayer.statistics.maps_won }} Maps Won
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team2currentplayer.statistics.maps_lost }} Maps Lost
               </div>
-              <div class="md-subhead">
+              <div class="md-subhead-updates">
                 {{ team2currentplayer.statistics.kills }} Total Kills
               </div>
-              <div class="md-subhead">
-                {{ team2currentplayer.statistics.deaths }}Total Deaths
+              <div class="md-subhead-updates">
+                {{ team2currentplayer.statistics.deaths }} Total Deaths
               </div>
             </md-card-header-text>
 
@@ -133,15 +216,18 @@
 </template>
 
 <script>
+import ModalCharts from "./ModalCharts";
 import TeamStats from "./TeamStats";
 import axios from "axios";
 export default {
   name: "TeamComparePage",
   components: {
-    TeamStats
+    TeamStats,
+    ModalCharts
   },
   data() {
     return {
+      showDialog: false,
       isLoading: false,
       team1: null,
       team2: null,
@@ -152,7 +238,10 @@ export default {
       team2_stats: false,
       team2_roster: true,
       team1currentplayer: null,
-      team2currentplayer: null
+      team2currentplayer: null,
+      team1_results: null,
+      team2_results: null,
+      h2h_results: null
     };
   },
   created() {
@@ -196,23 +285,59 @@ export default {
       this.team1_stats = false;
       this.team1_roster = true;
     },
-    setTeam1Stats() {
+    async setTeam1Stats() {
       this.team1_roster = false;
       this.team1_stats = true;
+      if (!this.team1_results) {
+        try {
+          const res = await axios.get(
+            `/api/esports/team/results/${this.teamid1}`
+          );
+          this.team1_results = res.data;
+          console.log(this.team1_results);
+        } catch (err) {
+          console.log(err);
+        }
+      }
     },
     setTeam2Roster() {
       this.team2_stats = false;
       this.team2_roster = true;
     },
-    setTeam2Stats() {
+    async setTeam2Stats() {
       this.team2_roster = false;
       this.team2_stats = true;
+      if (!this.team2_results) {
+        try {
+          const res = await axios.get(
+            `/api/esports/team/results/${this.teamid2}`
+          );
+          this.team2_results = res.data;
+          console.log(this.team2_results);
+        } catch (err) {
+          console.log(err);
+        }
+      }
     },
     setTeam1Player(player) {
       this.team1currentplayer = player;
     },
     setTeam2Player(player) {
       this.team2currentplayer = player;
+    },
+    async getH2H() {
+      this.showDialog = true;
+      if (this.h2h_results == null) {
+        try {
+          const response = await axios.get(
+            `/api/esports/h2h/${this.teamid1}/${this.teamid2}`
+          );
+          this.h2h_results = response.data;
+          console.log(this.h2h_results);
+        } catch (err) {
+          console.log(err);
+        }
+      }
     }
   }
 };
@@ -222,7 +347,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Oswald&display=swap");
 .team_compare_page {
   display: grid;
-  grid-template-columns: 0.25fr 0.5fr 0.5fr 0.25fr 0.5fr;
+  grid-template-columns: 0.25fr 0.5fr 0.5fr 0.25fr 0.3fr;
 }
 .team-compare-container {
   grid-column: 2/4;
@@ -265,14 +390,18 @@ export default {
 }
 .player {
   border: 1px solid black;
-  height: 175px;
   display: grid;
-  grid-template-rows: 15px 125px;
+  grid-template-rows: 15px;
   justify-self: center;
-  padding: 10px;
+  align-self: center;
+  padding: 5px 10px;
   border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  grid-row-gap: 10px;
   box-shadow: 2px 3px rgba(0, 0, 0, 0.3);
   margin: 5px;
+  cursor: pointer;
 }
 .player:hover {
   background: #f8f8f8;
@@ -330,13 +459,60 @@ export default {
   grid-column: 5;
   align-self: center;
   margin-top: -75%;
-  margin-right: 15px;
+  margin-left: -50%;
+  margin-right: 25%;
 }
 .highlighted-player2 {
   grid-row: 3;
   grid-column: 5;
   align-self: center;
-  margin-right: 15px;
+  margin-left: -50%;
   margin-top: -75%;
+  margin-right: 25%;
+}
+.md-subhead-updates {
+  color: black;
+}
+.modal-team-name {
+  font-size: 34px;
+  padding: 25px;
+}
+.matchup-modal {
+  height: auto;
+  width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  overflow: scroll;
+}
+.matchup-charts {
+  height: auto;
+  width: 1050px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+.win_color {
+  color: green;
+}
+.lose_color {
+  color: red;
+}
+.md-title-date {
+  font-size: 18px;
+  text-align: center;
+}
+.md-title-tname {
+  font-size: 24px;
+  text-align: center;
+}
+.modal-charts-comp {
+  grid-column: 1/3;
+}
+.modhead img {
+  height: 100px;
+}
+.matchupbutton {
+  grid-column: 2/4;
 }
 </style>

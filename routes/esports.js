@@ -163,4 +163,30 @@ router.get("/teams", async (req, res) => {
   }
 });
 
+router.get("/team/results/:teamid", async (req, res) => {
+  const { teamid } = req.params;
+  try {
+    const response = await fetch(
+      `http://api.sportradar.us/csgo-t1/en/teams/${teamid}/results.json?api_key=${process.env.CSGO_API_KEY}`
+    );
+    const data = await response.json();
+    res.send(data.results);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/h2h/:team1/:team2", async (req, res) => {
+  const { team1, team2 } = req.params;
+  try {
+    const response = await fetch(
+      `http://api.sportradar.us/csgo-t1/en/teams/${team1}/versus/${team2}/matches.json?api_key=${process.env.CSGO_API_KEY}`
+    );
+    const data = await response.json();
+    res.send(data.last_meetings.results);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

@@ -2,6 +2,14 @@
   <div class="match-info">
     <img v-if="loading" class="loading" src="../../../assets/30.gif" alt />
     <div v-if="teams && !loading">
+      <div class="team-search">
+        <span>You must have ONLY two selected teams to compare them.</span>
+        <a
+          :href="'/esports/team/' + selected[0].id + '/' + selected[1].id"
+          v-if="selected.length == 2"
+          >Compare Teams</a
+        >
+      </div>
       <md-table v-model="team_data" md-card @md-selected="onSelect">
         <md-table-row
           slot="md-table-row"
@@ -9,68 +17,96 @@
           md-selectable="multiple"
           md-auto-select
         >
-          <md-table-cell md-label="Abbrev" md-sort-by="name">{{ item.abbreviation }}</md-table-cell>
-          <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
+          <md-table-cell md-label="Abbrev" md-sort-by="name">{{
+            item.abbreviation
+          }}</md-table-cell>
+          <md-table-cell md-label="Name" md-sort-by="name">{{
+            item.name
+          }}</md-table-cell>
         </md-table-row>
       </md-table>
-      <a
-        :href="'/esports/team/'+ selected[0].id + '/' + selected[1].id"
-        v-if="selected.length == 2"
-      >Compare Teams</a>
-      <span>You must have ONLY two selected teams to compare them.</span>
     </div>
 
     <div v-if="!teams && !loading">
       <div class="cs-match-container">
         <div class="home-team-header">
           <div style="justify-self: center;">
-            <img :src="'https://ls.sportradar.com/ls/crest/big/'+ homeid +'.png'" />
+            <img
+              :src="'https://ls.sportradar.com/ls/crest/big/' + homeid + '.png'"
+            />
           </div>
           <div style="align-self: center;">
-            <span
-              class="csgo_team_name"
-            >{{page_data.data.competitors[0].name ? page_data.data.competitors[0].name : 'Uknown'}}</span>
+            <span class="csgo_team_name">{{
+              page_data.data.competitors[0].name
+                ? page_data.data.competitors[0].name
+                : "Uknown"
+            }}</span>
           </div>
 
           <div style="justify-self: center;">
             <span
-              v-bind:class="page_data.sport.home_score > page_data.sport.away_score ? 'win score' : 'lose score' "
-            >{{page_data.sport.home_score}}</span>
+              v-bind:class="
+                page_data.sport.home_score > page_data.sport.away_score
+                  ? 'win score'
+                  : 'lose score'
+              "
+              >{{ page_data.sport.home_score }}</span
+            >
           </div>
         </div>
         <div class="away-team-header">
           <div style="justify-self: center;">
             <img
               style="justify-self: center;"
-              :src="'https://ls.sportradar.com/ls/crest/big/'+ awayid +'.png'"
+              :src="'https://ls.sportradar.com/ls/crest/big/' + awayid + '.png'"
             />
           </div>
           <div style="align-self: center;">
-            <span
-              class="csgo_team_name"
-            >{{page_data.data.competitors[1].name ? page_data.data.competitors[1].name : 'Uknown'}}</span>
+            <span class="csgo_team_name">{{
+              page_data.data.competitors[1].name
+                ? page_data.data.competitors[1].name
+                : "Uknown"
+            }}</span>
           </div>
           <div style="justify-self: center;">
             <span
-              v-bind:class="page_data.sport.away_score > page_data.sport.home_score ? 'win score' : 'lose score' "
-            >{{page_data.sport.away_score}}</span>
+              v-bind:class="
+                page_data.sport.away_score > page_data.sport.home_score
+                  ? 'win score'
+                  : 'lose score'
+              "
+              >{{ page_data.sport.away_score }}</span
+            >
           </div>
         </div>
 
         <ul class="map-list">
-          <li v-bind:key="index + 'game'" v-for="(game, index) in page_data.sport.period_scores">
+          <li
+            v-bind:key="index + 'game'"
+            v-for="(game, index) in page_data.sport.period_scores"
+          >
             <img
               class="map_image"
-              :src="require(`@/assets/${game.map_name ? game.map_name : 'unknown'}.jpg`)"
+              :src="
+                require(`@/assets/${
+                  game.map_name ? game.map_name : 'unknown'
+                }.jpg`)
+              "
             />
             <br />
             <span>
               <span
-                v-bind:class="game.home_score > game.away_score ? 'win' : 'lose' "
-              >{{game.home_score}}</span>:
+                v-bind:class="
+                  game.home_score > game.away_score ? 'win' : 'lose'
+                "
+                >{{ game.home_score }}</span
+              >:
               <span
-                v-bind:class="game.away_score> game.home_score ? 'win' : 'lose' "
-              >{{game.away_score}}</span>
+                v-bind:class="
+                  game.away_score > game.home_score ? 'win' : 'lose'
+                "
+                >{{ game.away_score }}</span
+              >
             </span>
           </li>
         </ul>
@@ -128,6 +164,7 @@ export default {
     bus.$on("getTeams", async () => {
       this.loading = true;
       this.teams = true;
+      this.selected = [];
       try {
         const res = await axios.get(`/api/esports/teams`);
         this.team_data = res.data;
@@ -238,5 +275,39 @@ export default {
 }
 .md-content.md-theme-default {
   background-color: #ececec !important;
+}
+.team-search {
+  grid-column: 4;
+  margin-top: 10px;
+  color: black;
+}
+.team-search:hover {
+  color: black;
+}
+.team-search a {
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin: 10px;
+  background: rgba(255, 0, 0, 0.384);
+}
+.team-search a:link {
+  color: black;
+}
+
+/* visited link */
+.team-search a:visited {
+  color: black;
+}
+
+/* mouse over link */
+.team-search a:hover {
+  color: black;
+  text-decoration: none;
+  background: #e0e0e0;
+}
+
+/* selected link */
+.team-search a:active {
+  color: black;
 }
 </style>
