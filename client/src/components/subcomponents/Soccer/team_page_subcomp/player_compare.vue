@@ -4,7 +4,9 @@
       v-if="player1.player_name != '' && player2.player_name != ''"
       style="text-align: center; justify-self: center; font-size: 24px;"
     >
-      <a v-bind:href="'/soccer/team/' + id + '/players'">View in depth analysis</a>
+      <a v-bind:href="'/soccer/team/' + id + '/players'" class="indepth"
+        >View in depth analysis</a
+      >
     </div>
 
     <div class="player1">
@@ -14,61 +16,57 @@
         class="player_picture"
       />
       <br />
-      {{player1.player_name}}
+      {{ player1.player_name }}
     </div>
-    <div
-      class="align_center compare_stat"
-      v-if="player1.player_name == ''"
-    >Select Players to Compare</div>
+    <div class="align_center compare_stat" v-if="player1.player_name == ''">
+      Select Players to Compare
+    </div>
     <div class="player-comparison" v-if="player1.player_name != ''">
       <div
         class="p1_num"
-        v-bind:class="player1.player_age < player2.player_age ? 'underline-text' : 'no-underline'"
-      >{{player1.player_age}}</div>
+        v-bind:class="
+          player1.player_age < player2.player_age
+            ? 'underline-text'
+            : 'no-underline'
+        "
+      >
+        {{ player1.player_age }}
+      </div>
       <div class="compare_stat">Age</div>
       <div
         class="p2_num"
-        v-bind:class="player1.player_age > player2.player_age ? 'underline-text' : 'no-underline'"
-      >{{player2.player_age}}</div>
-      <div class="p1_num">{{player1.player_country}}</div>
+        v-bind:class="
+          player1.player_age > player2.player_age
+            ? 'underline-text'
+            : 'no-underline'
+        "
+      >
+        {{ player2.player_age }}
+      </div>
+      <div class="p1_num">{{ player1.player_country }}</div>
       <div class="compare_stat">Country</div>
-      <div class="p2_num">{{player2.player_country}}</div>
+      <div class="p2_num">{{ player2.player_country }}</div>
       <div
         class="p1_num"
-        v-bind:class="player1.player_match_played > player2.player_match_played ? 'underline-text' : 'no-underline'"
-      >{{player1.player_match_played}}</div>
+        v-bind:class="
+          player1.player_match_played > player2.player_match_played
+            ? 'underline-text'
+            : 'no-underline'
+        "
+      >
+        {{ player1.player_match_played }}
+      </div>
       <div class="compare_stat">Matches Played</div>
       <div
         class="p2_num"
-        v-bind:class="player1.player_match_played < player2.player_match_played ? 'underline-text' : 'no-underline'"
-      >{{player2.player_match_played}}</div>
-      <div
-        class="p1_num"
-        v-bind:class="player1.player_goals > player2.player_goals ? 'underline-text' : 'no-underline'"
-      >{{player1.player_goals}}</div>
-      <div class="compare_stat">Goals</div>
-      <div
-        class="p2_num"
-        v-bind:class="player1.player_goals < player2.player_goals ? 'underline-text' : 'no-underline'"
-      >{{player2.player_goals}}</div>
-      <div
-        class="p1_num"
-        v-bind:class="player1.player_yellow_cards < player2.player_yellow_cards ? 'underline-text' : 'no-underline'"
-      >{{player1.player_yellow_cards}}</div>
-      <div class="compare_stat">Yellow Cards</div>
-      <div
-        class="p2_num"
-        v-bind:class="player1.player_yellow_cards > player2.player_yellow_cards ? 'underline-text' : 'no-underline'"
-      >{{player2.player_yellow_cards}}</div>
-      <div
-        class="p1_num"
-        v-bind:class="player1.player_red_cards < player2.player_red_cards ? 'underline-text' : 'no-underline'"
-      >{{player1.player_red_cards}}</div>
-      <div class="compare_stat">Red Cards</div>
-      <div
-        class="p2_num"
-        v-bind:class="player1.player_red_cards > player2.player_red_cards ? 'underline-text' : 'no-underline'"
-      >{{player2.player_red_cards}}</div>
+        v-bind:class="
+          player1.player_match_played < player2.player_match_played
+            ? 'underline-text'
+            : 'no-underline'
+        "
+      >
+        {{ player2.player_match_played }}
+      </div>
     </div>
     <div class="player2">
       <img
@@ -77,16 +75,20 @@
         class="player_picture"
       />
       <br />
-      {{player2.player_name}}
+      {{ player2.player_name }}
     </div>
     <div class="player_chooser">
-      <carousel :navigationEnabled="true" :paginationEnabled="false" :perPage="6">
+      <carousel
+        :navigationEnabled="true"
+        :paginationEnabled="false"
+        :perPage="6"
+      >
         <slide v-bind:key="index + 'player'" v-for="(players, index) in team">
           <slide>
             <div class="card2" v-on:click="selectPlayers(team[index])">
               <img src="../../../../assets/player.png" class="player_picture" />
               <br />
-              {{team[index].player_name}}
+              {{ team[index].player_name }}
             </div>
           </slide>
         </slide>
@@ -278,5 +280,14 @@ export default {
   font-size: 18px;
   color: black;
   text-shadow: 2px 2px 2px 1px black;
+}
+.indepth {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 10px;
+  align-self: center;
+  color: black;
+  background: black;
 }
 </style>

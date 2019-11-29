@@ -17,7 +17,10 @@ router.get("/", async (req, res) => {
     //Reverse the array to display the events in order
     const newArr = arr.reverse();
     const dat = newArr.filter(ent => {
-      return ent.sport_event_status.match_status == "ended";
+      return (
+        ent.sport_event_status.match_status == "ended" &&
+        ent.coverage_info.live_coverage == true
+      );
     });
 
     res.send(dat);

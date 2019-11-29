@@ -25,7 +25,8 @@
               v-bind:team2="team2.statistics.team"
             />
           </div>
-
+          <h2>Past Matchups</h2>
+          <hr />
           <div class="matchup-modal">
             <div
               v-bind:key="index + 'h2h'"

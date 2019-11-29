@@ -1,15 +1,26 @@
 <template>
   <div>
     <div class="container">
-      <div v-if="loading" style="grid-column:2; justify-self: center; margin: 25%;">
+      <div
+        v-if="loading"
+        style="grid-column:2; justify-self: center; margin: 25%;"
+      >
         <img src="../../../../assets/30.gif" />
       </div>
       <div v-if="!loading" class="options">
         <div class="date">
           <label>Start</label>
-          <datepicker :format="format" @selected="setStartDate" placeholder="Select Date"></datepicker>
+          <datepicker
+            :format="format"
+            @selected="setStartDate"
+            placeholder="Select Date"
+          ></datepicker>
           <label>End</label>
-          <datepicker :format="format" @selected="setEndDate" placeholder="Select Date"></datepicker>
+          <datepicker
+            :format="format"
+            @selected="setEndDate"
+            placeholder="Select Date"
+          ></datepicker>
           <button v-on:click="searchGames">Search</button>
         </div>
         <div class="selector">
@@ -27,24 +38,37 @@
       <div v-if="!loading" class="mcontainer">
         <div v-if="!data" class="alert-container">
           <div class="alert">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <span
+              class="closebtn"
+              onclick="this.parentElement.style.display='none';"
+              >&times;</span
+            >
             No Results could be found for the dates specified!
           </div>
         </div>
 
-        <div v-else class v-bind:key="i.event_key" v-for="i in data.slice(0,selected)">
+        <div
+          v-else
+          class
+          v-bind:key="i.event_key"
+          v-for="i in data.slice(0, selected)"
+        >
           <md-card class="bg" md-with-hover>
             <md-ripple>
               <md-card-header>
-                <div class="title">{{i.event_home_team}} vs {{i.event_away_team}}</div>
+                <div class="title">
+                  {{ i.event_home_team }} vs {{ i.event_away_team }}
+                </div>
               </md-card-header>
 
               <md-card-content>
-                <div class="card-score" v-if="i.event_status != null">({{i.event_final_result}})</div>
+                <div class="card-score" v-if="i.event_status != null">
+                  ({{ i.event_final_result }})
+                </div>
                 <div v-else class="card-time">
-                  {{i.event_date}}
+                  {{ i.event_date }}
                   <br />
-                  {{i.event_time}}
+                  {{ i.event_time }}
                   <br />
                 </div>
               </md-card-content>
@@ -103,7 +127,6 @@ export default {
     };
   },
   methods: {
-    //NOTE: I NEED TO FIGURE OUT HOW TO COMBINE THE INFORMATION I WANT TO CONTAIN IN THE MODAL
     show(num) {
       this.$modal.show("match-stats");
       this.id = num;
@@ -131,8 +154,8 @@ export default {
 
   async created() {
     this.loading = true;
-    const defaultstart = "2019-08-23";
-    const defaultend = "2019-09-23";
+    const defaultstart = "2019-09-23";
+    const defaultend = "2019-09-25";
     try {
       const data = await axios(
         `/api/soccer/score/${defaultstart}/${defaultend}`

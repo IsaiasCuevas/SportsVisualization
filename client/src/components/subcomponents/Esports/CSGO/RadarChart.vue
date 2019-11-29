@@ -4,41 +4,43 @@
       <div class="csgo-home-player-card">
         <div class="csgo-home-card-player">{{ home.nickname }}</div>
         <div class="home-card-stats">
-          <ul>
-            <li>
-              <img
-                v-bind:src="
-                  'https:/ls.sportradar.com/ls/players/eslsmall/' +
-                    hplayer_id +
-                    '.png'
-                "
-              />
-            </li>
-            <li>
-              <span class="stat_name">Kills:</span>
-              {{ home.statistics.kills }}
-            </li>
-            <li>
-              <span class="stat_name">Assists:</span>
-              {{ home.statistics.assists }}
-            </li>
-            <li>
-              <span class="stat_name">Deaths:</span>
-              {{ home.statistics.deaths }}
-            </li>
-            <li>
-              <span class="stat_name">K/D:</span>
-              {{ home.statistics.kd_ratio }}
-            </li>
-            <li>
-              <span class="stat_name">HS %:</span>
-              {{ home.statistics.headshot_percent }}
-            </li>
-            <li>
-              <span class="stat_name">HS:</span>
-              {{ home.statistics.headshots }}
-            </li>
-          </ul>
+          <div class="player_image">
+            <img
+              v-bind:src="
+                'https:/ls.sportradar.com/ls/players/eslsmall/' +
+                  hplayer_id +
+                  '.png'
+              "
+            />
+          </div>
+          <div>
+            <div>
+              <span class="stat_name">Kills: </span>
+              <span class="stat_value">{{ home.statistics.kills }}</span>
+            </div>
+            <div>
+              <span class="stat_name">Assists: </span>
+              <span class="stat_value">{{ home.statistics.assists }}</span>
+            </div>
+            <div>
+              <span class="stat_name">Deaths: </span>
+              <span class="stat_value">{{ home.statistics.deaths }}</span>
+            </div>
+            <div>
+              <span class="stat_name">K/D: </span>
+              <span class="stat_value">{{ home.statistics.kd_ratio }}</span>
+            </div>
+            <div>
+              <span class="stat_name">HS %: </span>
+              <span class="stat_value">{{
+                home.statistics.headshot_percent
+              }}</span>
+            </div>
+            <div>
+              <span class="stat_name">HS: </span>
+              <span class="stat_value">{{ home.statistics.headshots }}</span>
+            </div>
+          </div>
         </div>
       </div>
       {{ home.statistics.trend }}
@@ -52,41 +54,43 @@
       <div class="csgo-away-player-card">
         <div class="csgo-away-card-player">{{ away.nickname }}</div>
         <div class="away-card-stats">
-          <ul>
-            <li>
-              <img
-                v-bind:src="
-                  'https:/ls.sportradar.com/ls/players/eslsmall/' +
-                    aplayer_id +
-                    '.png'
-                "
-              />
-            </li>
-            <li>
-              <span class="stat_name">Kills:</span>
-              {{ away.statistics.kills }}
-            </li>
-            <li>
-              <span class="stat_name">Assists:</span>
-              {{ away.statistics.assists }}
-            </li>
-            <li>
-              <span class="stat_name">Deaths:</span>
-              {{ away.statistics.deaths }}
-            </li>
-            <li>
-              <span class="stat_name">K/D:</span>
-              {{ away.statistics.kd_ratio }}
-            </li>
-            <li>
-              <span class="stat_name">HS %:</span>
-              {{ away.statistics.headshot_percent }}
-            </li>
-            <li>
-              <span class="stat_name">HS:</span>
-              {{ away.statistics.headshots }}
-            </li>
-          </ul>
+          <div class="player_image">
+            <img
+              v-bind:src="
+                'https:/ls.sportradar.com/ls/players/eslsmall/' +
+                  aplayer_id +
+                  '.png'
+              "
+            />
+          </div>
+          <div>
+            <div>
+              <span class="stat_name">Kills: </span>
+              <span class="stat_value">{{ away.statistics.kills }}</span>
+            </div>
+            <div>
+              <span class="stat_name">Assists: </span>
+              <span class="stat_value">{{ away.statistics.assists }}</span>
+            </div>
+            <div>
+              <span class="stat_name">Deaths: </span>
+              <span class="stat_value"> {{ away.statistics.deaths }}</span>
+            </div>
+            <div>
+              <span class="stat_name">K/D: </span>
+              <span class="stat_value">{{ away.statistics.kd_ratio }}</span>
+            </div>
+            <div>
+              <span class="stat_name">HS %: </span>
+              <span class="stat_value">
+                {{ away.statistics.headshot_percent }}</span
+              >
+            </div>
+            <div>
+              <span class="stat_name">HS: </span>
+              <span class="stat_value"> {{ away.statistics.headshots }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -136,9 +140,13 @@ export default {
             top: 1
           }
         },
+        colors: ["#0b3771", "#c00101"],
         title: {
           text: this.home.nickname + " vs " + this.away.nickname,
-          align: "center"
+          align: "center",
+          style: {
+            fontSize: "21px"
+          }
         },
         stroke: {
           width: 0
@@ -172,7 +180,7 @@ export default {
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 0.6fr;
   text-align: center;
-  background: #ececec;
+  background: white;
   border-radius: 5px;
   box-shadow: 2px 3px rgba(0, 0, 0, 0.3);
 }
@@ -182,22 +190,19 @@ export default {
   grid-template-columns: 1fr;
   grid-template-rows: 0.2fr 0.6fr;
   text-align: center;
-  background: #ececec;
+  background: white;
   border-radius: 5px;
   box-shadow: 2px 3px rgba(0, 0, 0, 0.3);
 }
-.home-card-stats ul {
-  padding: 0;
-  list-style-type: none;
-  justify-self: center;
-  text-align: center;
+.home-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.away-card-stats ul {
-  padding: 0;
-  list-style-type: none;
-  justify-self: center;
-  text-align: center;
+.away-card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
+
 .csgo-home-card-player {
   padding-top: 15px;
   font-size: 28px;
@@ -208,6 +213,13 @@ export default {
 }
 .stat_name {
   font-weight: bold;
+  font-size: 18px;
+  margin: 10px;
+}
+.stat_value {
   font-size: 16px;
+}
+.player_image {
+  margin: 10px;
 }
 </style>

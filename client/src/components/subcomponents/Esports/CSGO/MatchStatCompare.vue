@@ -21,19 +21,13 @@
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
                   <md-table-cell md-label="IGN">
-                    {{
-                    item.nickname
-                    }}
+                    {{ item.nickname }}
                   </md-table-cell>
                   <md-table-cell md-label="Kills">
-                    {{
-                    item.statistics.kills
-                    }}
+                    {{ item.statistics.kills }}
                   </md-table-cell>
                   <md-table-cell md-label="Deaths">
-                    {{
-                    item.statistics.deaths
-                    }}
+                    {{ item.statistics.deaths }}
                   </md-table-cell>
                 </md-table-row>
               </md-table>
@@ -50,19 +44,13 @@
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
                   <md-table-cell md-label="IGN">
-                    {{
-                    item.nickname
-                    }}
+                    {{ item.nickname }}
                   </md-table-cell>
                   <md-table-cell md-label="Kills">
-                    {{
-                    item.statistics.kills
-                    }}
+                    {{ item.statistics.kills }}
                   </md-table-cell>
                   <md-table-cell md-label="Deaths">
-                    {{
-                    item.statistics.deaths
-                    }}
+                    {{ item.statistics.deaths }}
                   </md-table-cell>
                 </md-table-row>
               </md-table>
@@ -87,19 +75,13 @@
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
                   <md-table-cell md-label="IGN">
-                    {{
-                    item.nickname
-                    }}
+                    {{ item.nickname }}
                   </md-table-cell>
                   <md-table-cell md-label="Kills">
-                    {{
-                    item.statistics.kills
-                    }}
+                    {{ item.statistics.kills }}
                   </md-table-cell>
                   <md-table-cell md-label="Deaths">
-                    {{
-                    item.statistics.deaths
-                    }}
+                    {{ item.statistics.deaths }}
                   </md-table-cell>
                 </md-table-row>
               </md-table>
@@ -116,19 +98,13 @@
                 >
                   <md-table-cell md-label="name">{{ item.name }}</md-table-cell>
                   <md-table-cell md-label="IGN">
-                    {{
-                    item.nickname
-                    }}
+                    {{ item.nickname }}
                   </md-table-cell>
                   <md-table-cell md-label="Kills">
-                    {{
-                    item.statistics.kills
-                    }}
+                    {{ item.statistics.kills }}
                   </md-table-cell>
                   <md-table-cell md-label="Deaths">
-                    {{
-                    item.statistics.deaths
-                    }}
+                    {{ item.statistics.deaths }}
                   </md-table-cell>
                 </md-table-row>
               </md-table>
@@ -172,15 +148,17 @@ export default {
     };
   },
   async mounted() {
-    this.loading = true;
-    try {
-      const res = await axios.get(`/api/esports/match/summary/${this.id}`);
-      this.match_data = res.data;
-      this.map_stats = res.data.statistics.maps;
-      this.loading = false;
-    } catch (err) {
-      this.loading = false;
-    }
+    setTimeout(async () => {
+      this.loading = true;
+      try {
+        const res = await axios.get(`/api/esports/match/summary/${this.id}`);
+        this.match_data = res.data;
+        this.map_stats = res.data.statistics.maps;
+        this.loading = false;
+      } catch (err) {
+        this.loading = false;
+      }
+    }, 2000);
   },
   methods: {
     onSelect(items) {

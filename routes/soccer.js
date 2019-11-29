@@ -36,7 +36,7 @@ router.get("/getmatch/:matchid", async (req, res) => {
   const { matchid } = req.params;
   try {
     const response = await fetch(
-      `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${process.env.SOCCER_API_KEY}&from=2017-05-23&to=2019-09-25&matchId=${matchid}`
+      `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${process.env.SOCCER_API_KEY}&from=2019-09-11&to=2020-09-25&matchId=${matchid}`
     );
     const data = await response.json();
 
@@ -64,7 +64,7 @@ router.get("/timeline/:matchid", async (req, res) => {
   const { matchid } = req.params;
   try {
     const response = await fetch(
-      `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${process.env.SOCCER_API_KEY}&from=2017-05-23&to=2019-09-25&matchId=${matchid}`
+      `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${process.env.SOCCER_API_KEY}&from=2019-09-11&to=2020-09-25&matchId=${matchid}`
     );
     const data = await response.json();
     const goals = data.result[0].goalscorers;
@@ -77,9 +77,21 @@ router.get("/timeline/:matchid", async (req, res) => {
         time = time.slice(0, 2);
       }
       if (home_scorer === "") {
-        tl.push({ time, person: away_scorer, info: score, type: "goal", team: 'away' });
+        tl.push({
+          time,
+          person: away_scorer,
+          info: score,
+          type: "goal",
+          team: "away"
+        });
       } else if (away_scorer === "") {
-        tl.push({ time, person: home_scorer, info: score, type: "goal", team: 'home' });
+        tl.push({
+          time,
+          person: home_scorer,
+          info: score,
+          type: "goal",
+          team: "home"
+        });
       }
     }
     for ({ time, home_fault, away_fault, card } of cards) {
@@ -87,20 +99,44 @@ router.get("/timeline/:matchid", async (req, res) => {
         time = time.slice(0, 2);
       }
       if (home_fault == "") {
-        tl.push({ time, person: away_fault, info: card, type: "card", team: 'away' });
+        tl.push({
+          time,
+          person: away_fault,
+          info: card,
+          type: "card",
+          team: "away"
+        });
       } else if (away_fault == "") {
-        tl.push({ time, person: home_fault, info: card, type: "card", team: 'home' });
+        tl.push({
+          time,
+          person: home_fault,
+          info: card,
+          type: "card",
+          team: "home"
+        });
       }
     }
     for ({ time, home_scorer, away_scorer, scorer } of subs) {
       if (home_scorer.length < 1) {
-        tl.push({ time, person: away_scorer.in, info: away_scorer.out, type: "sub", team: 'away' });
+        tl.push({
+          time,
+          person: away_scorer.in,
+          info: away_scorer.out,
+          type: "sub",
+          team: "away"
+        });
       }
       if (away_scorer.length < 1) {
-        tl.push({ time, person: home_scorer.in, info: home_scorer.out, type: "sub", team: 'home' });
+        tl.push({
+          time,
+          person: home_scorer.in,
+          info: home_scorer.out,
+          type: "sub",
+          team: "home"
+        });
       }
     }
-
+    console.log(tl);
     res.json(tl);
   } catch (err) {
     res.status(500);

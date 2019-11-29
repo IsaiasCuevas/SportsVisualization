@@ -3,19 +3,19 @@
     <div class="modalcharts">
       <apexchart
         type="pie"
-        width="250"
+        width="225"
         :options="chartOptions"
         :series="series"
       />
       <apexchart
         type="bar"
-        height="350"
+        height="250"
         :options="chartOptions3"
         :series="series3"
       />
       <apexchart
         type="pie"
-        width="250"
+        width="225"
         :options="chartOptions2"
         :series="series2"
       />
@@ -43,7 +43,7 @@ export default {
         colors: ["#56c376", "#ff0000"],
         title: {
           text: this.team1.name + "'s Win/Loss %",
-          align: "this",
+          align: "center",
           margin: 10,
           offsetX: 0,
           offsetY: 0,

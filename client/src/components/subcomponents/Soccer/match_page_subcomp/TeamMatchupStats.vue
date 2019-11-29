@@ -6,9 +6,9 @@
     <div class="charts">
       <div class="chart_card">
         <div class="card-stat-header">
-          <h1 class="stats-comparison-title">{{match.event_home_team}}</h1>
+          <h1 class="stats-comparison-team">{{ match.event_home_team }}</h1>
           <h1></h1>
-          <h1 class="stats-comparison-title">{{match.event_away_team}}</h1>
+          <h1 class="stats-comparison-team">{{ match.event_away_team }}</h1>
         </div>
         <div
           class="stat-comparison"
@@ -17,33 +17,69 @@
         >
           <div
             class="stat-comparison-home"
-            v-bind:class="[stats.home<stats.away ? 'red' : 'green' ]"
-          >{{stats.home}}</div>
-          <div class="stats-comparison-title">{{stats.type}}</div>
+            v-bind:class="[stats.home < stats.away ? 'red' : 'green']"
+          >
+            {{ stats.home }}
+          </div>
+          <div class="stats-comparison-title">{{ stats.type }}</div>
           <div
             class="stat-comparison-away"
-            v-bind:class="[stats.away<stats.home ? 'red' : 'green' ]"
-          >{{stats.away}}</div>
+            v-bind:class="[stats.away < stats.home ? 'red' : 'green']"
+          >
+            {{ stats.away }}
+          </div>
         </div>
       </div>
       <div class="chart_card2">
-        <apexchart type="donut" width="350" :options="donutchartOptions" :series="donutseries" />
-        <apexchart
-          class="chart"
-          type="bar"
-          height="170"
-          width="350"
-          :options="GoalAttempts"
-          :series="GoalAttemptsStats"
-        />
-        <apexchart
-          class="chart"
-          type="bar"
-          height="170"
-          width="350"
-          :options="ShotsOnGoal"
-          :series="ShotsOnGoalStats"
-        />
+        <div class="bpchart">
+          <apexchart
+            style="justify-self: center;"
+            type="donut"
+            width="250"
+            :options="donutchartOptions"
+            :series="donutseries"
+          />
+        </div>
+        <div class="chart2">
+          <apexchart
+            class="chart"
+            type="bar"
+            height="170"
+            width="250"
+            :options="GoalAttempts"
+            :series="GoalAttemptsStats"
+          />
+        </div>
+        <div class="chart3">
+          <apexchart
+            class="chart"
+            type="bar"
+            height="170"
+            width="250"
+            :options="ShotsOnGoal"
+            :series="ShotsOnGoalStats"
+          />
+        </div>
+        <div class="chart2">
+          <apexchart
+            class="chart"
+            type="bar"
+            height="170"
+            width="250"
+            :options="AttacksC"
+            :series="Attacks"
+          />
+        </div>
+        <div class="chart3">
+          <apexchart
+            class="chart"
+            type="bar"
+            height="170"
+            width="250"
+            :options="DAttacksC"
+            :series="DAttacks"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -65,6 +101,27 @@ export default {
   data() {
     return {
       hi: this.match,
+      Attacks: [
+        {
+          name: "Home",
+          data: [this.match.statistics[10].home]
+        },
+        {
+          name: "Away",
+          data: [this.match.statistics[10].away]
+        }
+      ],
+      DAttacks: [
+        {
+          name: "Home",
+          data: [this.match.statistics[11].home]
+        },
+        {
+          name: "Away",
+          data: [this.match.statistics[11].away]
+        }
+      ],
+
       GoalAttemptsStats: [
         {
           name: "Home",
@@ -75,6 +132,50 @@ export default {
           data: [this.match.statistics[1].away]
         }
       ],
+      AttacksC: {
+        chart: {
+          toolbar: {
+            show: false
+          }
+        },
+        title: {
+          text: "Attacks",
+          align: "center",
+          margin: 0,
+          floating: false,
+          style: {
+            fontFamily: "Oswald",
+            fontSize: "18px",
+            color: "black"
+          }
+        },
+        xaxis: {
+          categories: ["Home", "Away"]
+        },
+        colors: ["#252525", "#de9a35"]
+      },
+      DAttacksC: {
+        chart: {
+          toolbar: {
+            show: false
+          }
+        },
+        title: {
+          text: "Dangerous Attacks",
+          align: "center",
+          margin: 0,
+          floating: false,
+          style: {
+            fontFamily: "Oswald",
+            fontSize: "18px",
+            color: "black"
+          }
+        },
+        xaxis: {
+          categories: ["Home", "Away"]
+        },
+        colors: ["#252525", "#de9a35"]
+      },
       GoalAttempts: {
         chart: {
           background: "#f0f2f5",
@@ -172,7 +273,7 @@ export default {
         plotOptions: {
           bar: {
             horizontal: true,
-            barHeight: "80%"
+            barHeight: "50%"
           }
         },
         dataLabels: {
@@ -183,25 +284,7 @@ export default {
           colors: ["#fff"]
         },
         legend: {
-          show: true,
-          showForSingleSeries: false,
-          showForNullSeries: true,
-          showForZeroSeries: true,
-          position: "bottom",
-          horizontalAlign: "center",
-          floating: false,
-          fontSize: "22px",
-          fontFamily: "Oswald, Arial",
-          width: undefined,
-          height: undefined,
-          formatter: undefined,
-          tooltipHoverFormatter: undefined,
-          offsetX: 0,
-          offsetY: 0,
-          labels: {
-            colors: undefined,
-            useSeriesColors: false
-          }
+          show: false
         },
 
         grid: {
@@ -289,7 +372,6 @@ export default {
 };
 </script>
 
-
 <style>
 @import url("https://fonts.googleapis.com/css?family=Oswald&display=swap");
 .charts-container {
@@ -305,7 +387,7 @@ export default {
   grid-row: 3;
   grid-column: 1/7;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1.5fr;
   grid-template-rows: 0.25fr;
   margin: 0;
   background-color: #ffffff;
@@ -315,7 +397,7 @@ export default {
   font-family: "Oswald", sans-serif;
   grid-row: 1;
   padding: 5px;
-  grid-column: 1/3;
+  grid-column: 1/4;
   margin: 7px;
   border-radius: 10px;
   display: grid;
@@ -333,12 +415,16 @@ export default {
   margin: 5px;
   padding: 5px;
   grid-row: 1;
-  grid-column: 6;
+  grid-column: 4/7;
   border-radius: 10px;
   box-shadow: 1px 3px 1px 1px rgba(0, 0, 0, 0.2),
     0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 1px 1px 1px 2px rgba(0, 0, 0.5, 0.3) inset;
   -webkit-box-shadow: 2px 1px 2px 1.5px rgba(0, 0, 0, 0.3) inset;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 .red {
   background-color: red;
@@ -377,8 +463,13 @@ export default {
   border-radius: 10px;
 }
 .stats-comparison-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  align-self: center;
+}
+.stats-comparison-team {
   font-size: 28px;
-
   text-align: center;
   align-self: center;
 }
@@ -401,5 +492,16 @@ export default {
   grid-column: 2/4;
   justify-self: center;
 }
+.bpchart {
+  grid-column: 1/3;
+  justify-self: center;
+}
+.chart2 {
+  grid-column: 1;
+  justify-self: center;
+}
+.chart3 {
+  grid-column: 2;
+  justify-self: center;
+}
 </style>
-

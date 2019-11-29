@@ -7,7 +7,7 @@
     <ul class="timeline" v-if="!loading">
       <li
         class="start-end"
-        :style="{position: 'relative', left: '1%'} "
+        :style="{ position: 'relative', left: '1%' }"
         v-tooltip="{ content: 'Game Start' }"
       >
         <img src="../../../../assets/whistle.png" alt />
@@ -16,27 +16,56 @@
         class="point"
         v-bind:key="index + 'event'"
         v-for="(events, index) in timeline_data"
-        :style="{position: 'relative', left:events.time+'%'} "
+        :style="{ position: 'relative', left: events.time + '%' }"
       >
         <img
           v-if="events.type == 'card'"
           src="../../../../assets/yellow.png"
-          v-tooltip="{ content:  'Time: ' + events.time +'`' + '<br>Player: '+events.person+ '<br> Event: ' + events.info  }"
+          v-tooltip="{
+            content:
+              'Time: ' +
+              events.time +
+              '`' +
+              '<br>Player: ' +
+              events.person +
+              '<br> Event: ' +
+              events.info
+          }"
         />
         <img
           v-if="events.type == 'goal'"
           src="../../../../assets/soccer2.png"
-          v-tooltip="{ content: 'Time: ' + events.time +'`' +'<br>Player: '+events.person+ '<br> Event: ' + events.info   }"
+          v-tooltip="{
+            content:
+              'Time: ' +
+              events.time +
+              '`' +
+              '<br>Player: ' +
+              events.person +
+              '<br> Event: ' +
+              events.info
+          }"
         />
         <img
           v-if="events.type == 'sub'"
           src="../../../../assets/cycle.jpg"
-          v-tooltip="{ content:  ' Time: ' + events.time +'`'+ ' <br>In: ' +events.person+ '<br>Out: '+events.info+ '<br> Event: ' + events.type   }"
+          v-tooltip="{
+            content:
+              ' Time: ' +
+              events.time +
+              '`' +
+              ' <br>In: ' +
+              events.person +
+              '<br>Out: ' +
+              events.info +
+              '<br> Event: ' +
+              events.type
+          }"
         />
       </li>
       <li
         class="start-end"
-        :style="{position: 'relative', left: '85%'} "
+        :style="{ position: 'relative', left: '85%' }"
         v-tooltip="{ content: 'Game End' }"
       >
         <img src="../../../../assets/whistle.png" alt />
@@ -81,6 +110,11 @@ export default {
   overflow: hidden;
   padding: 5px;
 }
+
+.cs_timeline {
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.3);
+}
+
 .timeline li {
   float: left;
 }

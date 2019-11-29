@@ -54,6 +54,7 @@
             >
           </div>
         </div>
+        <div class="game-time"></div>
         <div class="away-team-header">
           <div style="justify-self: center;">
             <img
@@ -79,9 +80,10 @@
             >
           </div>
         </div>
+        <div class="divider"></div>
 
-        <ul class="map-list">
-          <li
+        <div class="map-list">
+          <div
             v-bind:key="index + 'game'"
             v-for="(game, index) in page_data.sport.period_scores"
           >
@@ -108,8 +110,25 @@
                 >{{ game.away_score }}</span
               >
             </span>
-          </li>
-        </ul>
+          </div>
+        </div>
+        <div class="match-links">
+          <a
+            class="link"
+            v-for="(game, index) in page_data.data.streams"
+            :key="index"
+            :href="game.url"
+            target="_blank"
+            >Link</a
+          >
+        </div>
+        <div class="match_tl">
+          <CSGOMatchTimeline
+            :match_id="page_data.data.id"
+            :home_name="page_data.data.competitors[0].name"
+            :away_name="page_data.data.competitors[1].name"
+          />
+        </div>
 
         <div class="game_stats" v-if="page_data.data.season">
           <CSGOCompare v-bind:id="page_data.data.id" />
@@ -120,13 +139,15 @@
 </template>
 
 <script>
+import CSGOMatchTimeline from "./CSGO/CSGOMatchTimeline";
 import CSGOCompare from "./CSGO/MatchStatCompare";
 import { bus } from "../../../main";
 import axios from "axios";
 export default {
   name: "MatchInfo",
   components: {
-    CSGOCompare
+    CSGOCompare,
+    CSGOMatchTimeline
   },
   data() {
     return {
@@ -207,11 +228,18 @@ export default {
   grid-row: 2;
   grid-column: 2;
   list-style-type: none;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid black;
+  justify-self: center;
+  border-radius: 5px;
+  box-shadow: 2px 3px rgba(0, 0, 0, 0.3);
+  background: white;
 }
 .home-team-header {
   font-size: 24px;
   font-family: "Oswald", sans-serif;
-  grid-column: 1/3;
+  grid-column: 2;
   justify-self: center;
   align-self: center;
   display: grid;
@@ -222,20 +250,25 @@ export default {
 .away-team-header {
   font-size: 24px;
   font-family: "Oswald", sans-serif;
-  grid-column: 4/6;
+  grid-column: 4;
   justify-self: center;
   align-self: center;
   display: grid;
   grid-template-rows: 1fr 0.75fr 0.3fr;
 }
+.game-time {
+  grid-column: 3;
+  justify-self: center;
+  align-self: center;
+}
 .game_stats {
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 1/7;
 }
 .map_image {
   height: 100px;
-  width: 200px;
-  margin-top: 25px;
+  width: 250px;
+  margin-top: 20px;
 }
 .win {
   color: green;
@@ -309,5 +342,29 @@ export default {
 /* selected link */
 .team-search a:active {
   color: black;
+}
+.match-links {
+  display: grid;
+  grid-template-rows: 50px 50px 50px 50px;
+}
+.link {
+  border: 1px solid black;
+  text-align: center;
+  color: black !important;
+  border-radius: 5px;
+  font-size: 18px;
+  align-self: center;
+  padding: 10px;
+}
+.link:hover {
+  border: 1px solid black;
+  text-align: center;
+  color: black !important;
+  text-decoration: none;
+  background: #ececec;
+}
+.match_tl {
+  grid-row: 3;
+  grid-column: 1/6;
 }
 </style>

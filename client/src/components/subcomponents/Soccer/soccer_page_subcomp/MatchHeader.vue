@@ -4,8 +4,9 @@
       <h1>
         <a
           class="home_team_link"
-          v-bind:href="'/soccer/team/' +stats.home_team_key"
-        >{{stats.event_home_team}}</a>
+          v-bind:href="'/soccer/team/' + stats.home_team_key"
+          >{{ stats.event_home_team }}</a
+        >
       </h1>
     </div>
     <div class="divider">
@@ -15,32 +16,39 @@
       <h1>
         <a
           class="away_team_link"
-          v-bind:href="'/soccer/team/' +stats.away_team_key"
-        >{{stats.event_away_team}}</a>
+          v-bind:href="'/soccer/team/' + stats.away_team_key"
+          >{{ stats.event_away_team }}</a
+        >
       </h1>
     </div>
 
     <div class="goals">
       <ul class="home_goals">
-        <li :key="'scorer' + index" v-for=" (scorer, index) in stats.goalscorers">
+        <li
+          :key="'scorer' + index"
+          v-for="(scorer, index) in stats.goalscorers"
+        >
           <img
             v-if="scorer.home_scorer != ''"
             class="mini_ball"
             src="../../../../assets/soccer2.png"
           />
-          {{scorer.home_scorer}}
-          <span v-if="scorer.home_scorer != ''">({{scorer.time}}')</span>
+          {{ scorer.home_scorer }}
+          <span v-if="scorer.home_scorer != ''">({{ scorer.time }}')</span>
         </li>
       </ul>
       <ul class="away_goals">
-        <li :key="'scorer' + index" v-for=" (scorer, index) in stats.goalscorers">
+        <li
+          :key="'scorer' + index"
+          v-for="(scorer, index) in stats.goalscorers"
+        >
           <img
             v-if="scorer.away_scorer != ''"
             class="mini_ball"
             src="../../../../assets/soccer2.png"
           />
-          {{scorer.away_scorer}}
-          <span v-if="scorer.away_scorer != ''">({{scorer.time}}')</span>
+          {{ scorer.away_scorer }}
+          <span v-if="scorer.away_scorer != ''">({{ scorer.time }}')</span>
         </li>
       </ul>
     </div>
