@@ -14,10 +14,12 @@ export default {
     Header
   }
 };
+
+
 </script>
 
 <style>
 body {
-  background-color: antiquewhite;
+  background-color: rgb(1, 69, 158);
 }
 </style>

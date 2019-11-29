@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./components/Home";
 import Soccer from "./components/Soccer";
 
+
 Vue.use(Router);
 
 export default new Router({

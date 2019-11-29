@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSeriesChart);
+
+    function drawSeriesChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Country', 'Win Percentage', 'Competition Outcome', 'Region',     'Wins'],
+        ['India',    77.78,              3,      'Asia',  7],
+        ['Australia',    70,              3,      'Australia',         7],
+        ['England',    70,               4.5,      'Europe',         6],
+        ['New Zealand',    66.67,              3.5,      'Australia',    5],
+        ['Pakistan',    62.5,              1,         'Asia',         5],
+        ['Sri Lanka',    42.86,              1,       'Asia',    3],
+        ['South Africa',    37.5,              1,      'Africa',    3],
+        ['Bangladesh',    37.5,              1,      'Asia',    3],
+        ['West Indies',    25,               1,      'North America',         2],
+        ['Afghanistan',    0,              0,      'Asia',  0]
+      ]);
+
+      var options = {
+        title: 'Correlation between team wins and competition outcome',
+        hAxis: {title: 'Win Percentage'},
+        vAxis: {title: 'Competition Result Ranking'},
+        bubble: {textStyle: {fontSize: 11}}      };
+
+      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="series_chart_div" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
