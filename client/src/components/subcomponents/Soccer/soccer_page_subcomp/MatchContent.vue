@@ -1,9 +1,13 @@
 <template>
   <div class="match_content">
-    <div class="stat-type" :key="'stats' + index" v-for="(stats, index) in stats.statistics">
-      <div class="home-stat">{{stats.home}}</div>
-      <div class="stats-title">{{stats.type}}</div>
-      <div class="away-stat">{{stats.away}}</div>
+    <div
+      class="stat-type"
+      :key="'stats' + index"
+      v-for="(stats, index) in stats.statistics"
+    >
+      <div class="home-stat">{{ stats.home }}</div>
+      <div class="stats-title">{{ stats.type }}</div>
+      <div class="away-stat">{{ stats.away }}</div>
       <hr />
     </div>
   </div>
@@ -23,7 +27,7 @@ export default {
 <style>
 .match_content {
   grid-column: 1/6;
-  border: 1px solid black;
+
   background-image: linear-gradient(to bottom, #ffffff, rgb(206, 206, 206));
   padding: 15px;
 }

@@ -18,9 +18,10 @@
     <MatchContent v-bind:stats="stats" />
     <a
       v-if="stats.event_ft_result != null"
-      v-bind:href="'/soccer/match/' +stats.event_key"
+      v-bind:href="'/soccer/match/' + stats.event_key"
       class="modal-button"
-    >Detailed Information</a>
+      >Detailed Information</a
+    >
   </modal>
 </template>
 <script>
@@ -69,7 +70,7 @@ export default {
   font-size: 24px;
   padding: 5px;
   text-decoration: none;
-  color: black;
+  color: black !important;
 }
 .modal-button:active {
   color: black;

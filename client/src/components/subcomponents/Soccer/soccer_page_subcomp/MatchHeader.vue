@@ -68,7 +68,6 @@ export default {
 
 <style>
 .stats-header {
-  border: 1px solid black;
   grid-column: 1/6;
   height: 100%;
   min-height: 150px;
@@ -132,12 +131,12 @@ export default {
 }
 .home_team_link {
   text-align: center;
-  color: black;
+  color: black !important;
   font-weight: bolder;
   text-decoration: none;
 }
 .away_team_link {
-  color: black;
+  color: black !important;
   font-weight: bolder;
   text-decoration: none;
 }
