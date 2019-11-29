@@ -136,7 +136,6 @@ router.get("/timeline/:matchid", async (req, res) => {
         });
       }
     }
-    console.log(tl);
     res.json(tl);
   } catch (err) {
     res.status(500);
