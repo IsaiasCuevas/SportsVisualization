@@ -1,12 +1,13 @@
-const path = require("path");
-
 module.exports = {
-  outputDir: path.resolve(__dirname, "../public"),
-  devServer: {
-    proxy: {
+  "outputDir": "C:\\Users\\henry\\Documents\\GitHub\\SportsVisualization\\public",
+  "devServer": {
+    "proxy": {
       "": {
-        target: "http://localhost:8000"
+        "target": "http://localhost:8000"
       }
     }
-  }
-};
+  },
+  "transpileDependencies": [
+    "vuetify"
+  ]
+}

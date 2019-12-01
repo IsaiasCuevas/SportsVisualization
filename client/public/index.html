@@ -6,11 +6,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.png">
+  
   <title>Sports Visualization
   </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.css" />
 </head>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
 
 <body>
+  
   <noscript>
     <strong>We're sorry but client doesn't work properly without JavaScript enabled. Please enable it to
       continue.</strong>
@@ -18,5 +30,13 @@
   <div id="app"></div>
   <!-- built files will be auto injected -->
 </body>
+<style>
+  .ct-series-a .ct-bar, .ct-series-b .ct-line, .ct-series-b .ct-point, .ct-series-b .ct-slice-donut {
+       stroke: goldenrod;
+  }
+</style>
+
+
+
 
 </html>
