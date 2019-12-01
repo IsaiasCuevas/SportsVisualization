@@ -86,10 +86,8 @@ export default {
       const req = await axios.get(`/api/soccer/timeline/${this.eventID}`);
       this.timeline_data = req.data;
       this.loading = false;
-      console.log(this.timeline_data);
     } catch (err) {
       this.loading = false;
-      console.log(err);
     }
   },
   data() {

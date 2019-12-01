@@ -95,9 +95,7 @@ export default {
     MatchTimeline
   },
   props: ["match"],
-  created() {
-    console.log(this.hi);
-  },
+  created() {},
   data() {
     return {
       hi: this.match,

@@ -252,9 +252,7 @@ export default {
         const data = response.data;
         this.tl_data = data;
         this.loading = false;
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }, 1000);
   }
 };

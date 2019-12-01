@@ -35,7 +35,7 @@ export default {
       x: 0,
       rotation: 0,
       ease: Back.easeInOut,
-      fontSize: 130
+      fontSize: 20
     });
     timelines.to(title, 0.5, {
       ease: Back.easeInOut,
@@ -124,7 +124,7 @@ a {
   padding: 150px 50px 150px 50px;
   grid-column: 2;
   grid-row: 2;
-  font-size: 120px;
+  font-size: 50rem;
 }
 .home-page-subtitle {
   grid-row: 3;

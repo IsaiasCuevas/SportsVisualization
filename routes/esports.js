@@ -141,7 +141,9 @@ router.get("/teams", async (req, res) => {
     const data = await response.json();
     const arr = data.teams;
 
-    //Filters the response givent by the fetch get request.
+    //Filters the response returned by the fetch get request.
+    //If this wouldn't have been filtered, the number of teams returned,
+    //would have been in the thousands so we chose some popular teams.
     const dat = arr.filter(ent => {
       return (
         ent.name == "Cloud9" ||
@@ -166,6 +168,7 @@ router.get("/teams", async (req, res) => {
   }
 });
 
+//This route will return the recent matches for the team provided.
 router.get("/team/results/:teamid", async (req, res) => {
   const { teamid } = req.params;
   try {
@@ -179,6 +182,8 @@ router.get("/team/results/:teamid", async (req, res) => {
   }
 });
 
+//This route provides all prior matches where the two provided teams have faced each other.
+//It will not provide specific details, only the team names, tournaments, and final results.
 router.get("/h2h/:team1/:team2", async (req, res) => {
   const { team1, team2 } = req.params;
   try {

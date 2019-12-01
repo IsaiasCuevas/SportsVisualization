@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const fetch = require("node-fetch");
 
+//Call is used to return the soccer matches that occured in the dates that one provides to the call
 router.get("/score/:start/:end", async (req, res) => {
   const { start, end } = req.params;
   try {
@@ -16,6 +17,7 @@ router.get("/score/:start/:end", async (req, res) => {
   }
 });
 
+//This route returns a Head to Head of the two team ids that one provides.
 router.get("/compare/:team1/:team2", async (req, res) => {
   const { team1, team2 } = req.params;
   try {
@@ -32,6 +34,7 @@ router.get("/compare/:team1/:team2", async (req, res) => {
   }
 });
 
+//This route will ONLY provide data for the specific match that one chooses.
 router.get("/getmatch/:matchid", async (req, res) => {
   const { matchid } = req.params;
   try {
@@ -60,6 +63,8 @@ router.get("/team/:teamid", async (req, res) => {
   }
 });
 
+//Used the allsports api match call and manipulated the data to only return what was needed to make a match timeline.
+//The call returns important events that occur during the match along with the team that they correspond to and the minute they occur.
 router.get("/timeline/:matchid", async (req, res) => {
   const { matchid } = req.params;
   try {

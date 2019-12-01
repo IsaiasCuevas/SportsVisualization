@@ -156,19 +156,34 @@
             <md-card-header-text>
               <div class="md-title">{{ team1currentplayer.nickname }}</div>
               <div class="md-subhead-updates">
-                {{ team1currentplayer.statistics.maps_played }} Maps Played
+                <span class="stat_value">{{
+                  team1currentplayer.statistics.maps_played
+                }}</span>
+                Maps Played
               </div>
               <div class="md-subhead-updates">
-                {{ team1currentplayer.statistics.maps_won }} Maps Won
+                <span class="stat_value"
+                  >{{ team1currentplayer.statistics.maps_won }}
+                </span>
+                Maps Won
               </div>
               <div class="md-subhead-updates">
-                {{ team1currentplayer.statistics.maps_lost }} Maps Lost
+                <span class="stat_value">{{
+                  team1currentplayer.statistics.maps_lost
+                }}</span>
+                Maps Lost
               </div>
               <div class="md-subhead-updates">
-                {{ team1currentplayer.statistics.kills }} Total Kills
+                <span class="stat_value">{{
+                  team1currentplayer.statistics.kills
+                }}</span>
+                Total Kills
               </div>
               <div class="md-subhead-updates">
-                {{ team1currentplayer.statistics.deaths }}Total Deaths
+                <span class="stat_value">{{
+                  team1currentplayer.statistics.deaths
+                }}</span>
+                Total Deaths
               </div>
             </md-card-header-text>
 
@@ -187,19 +202,34 @@
             <md-card-header-text>
               <div class="md-title">{{ team2currentplayer.nickname }}</div>
               <div class="md-subhead-updates">
-                {{ team2currentplayer.statistics.maps_played }} Maps Played
+                <span class="stat_value">{{
+                  team2currentplayer.statistics.maps_played
+                }}</span>
+                Maps Played
               </div>
               <div class="md-subhead-updates">
-                {{ team2currentplayer.statistics.maps_won }} Maps Won
+                <span class="stat_value">{{
+                  team2currentplayer.statistics.maps_won
+                }}</span>
+                Maps Won
               </div>
               <div class="md-subhead-updates">
-                {{ team2currentplayer.statistics.maps_lost }} Maps Lost
+                <span class="stat_value">{{
+                  team2currentplayer.statistics.maps_lost
+                }}</span>
+                Maps Lost
               </div>
               <div class="md-subhead-updates">
-                {{ team2currentplayer.statistics.kills }} Total Kills
+                <span class="stat_value">{{
+                  team2currentplayer.statistics.kills
+                }}</span>
+                Total Kills
               </div>
               <div class="md-subhead-updates">
-                {{ team2currentplayer.statistics.deaths }} Total Deaths
+                <span class="stat_value">{{
+                  team2currentplayer.statistics.deaths
+                }}</span>
+                Total Deaths
               </div>
             </md-card-header-text>
 
@@ -254,18 +284,14 @@ export default {
       try {
         const res = await axios.get(`/api/esports/team/${this.teamid1}`);
         this.team1 = res.data;
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }, 1000);
     setTimeout(async () => {
       try {
         const res = await axios.get(`/api/esports/team/${this.teamid2}`);
         this.team2 = res.data;
         this.loading = false;
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     }, 2000);
   },
   methods: {
@@ -295,10 +321,7 @@ export default {
             `/api/esports/team/results/${this.teamid1}`
           );
           this.team1_results = res.data;
-          console.log(this.team1_results);
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       }
     },
     setTeam2Roster() {
@@ -314,10 +337,7 @@ export default {
             `/api/esports/team/results/${this.teamid2}`
           );
           this.team2_results = res.data;
-          console.log(this.team2_results);
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       }
     },
     setTeam1Player(player) {
@@ -334,10 +354,7 @@ export default {
             `/api/esports/h2h/${this.teamid1}/${this.teamid2}`
           );
           this.h2h_results = response.data;
-          console.log(this.h2h_results);
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       }
     }
   }
@@ -515,5 +532,8 @@ export default {
 }
 .matchupbutton {
   grid-column: 2/4;
+}
+.stat_value {
+  font-weight: bold;
 }
 </style>

@@ -1,20 +1,29 @@
 <template>
   <div class="match-carousel">
     <img v-if="loading" src="../../../assets/30.gif" alt />
-    <Carousel v-if="!loading" :navigationEnabled="true" :paginationEnabled="false" :perPage="6">
+    <Carousel
+      v-if="!loading"
+      :navigationEnabled="true"
+      :paginationEnabled="false"
+      :perPage="6"
+    >
       <Slide v-bind:key="index + 'match'" v-for="(i, index) in match">
         <div class="header-card" v-on:click="setID(i.sport_event.id)">
-          <div class="time" v-if="i.sport_event_status.match_status == 'ended'">Finished</div>
-          <div class="time" v-if="i.sport_event_status.match_status != 'ended'">time</div>
-          <div class="home">{{i.sport_event.competitors[0].name}}</div>
-          <div class="home-score">
-            {{i.sport_event_status.period_scores[0].home_score}}
-            <span>({{i.sport_event_status.home_score}})</span>
+          <div class="time" v-if="i.sport_event_status.match_status == 'ended'">
+            Finished
           </div>
-          <div class="away">{{i.sport_event.competitors[1].name}}</div>
+          <div class="time" v-if="i.sport_event_status.match_status != 'ended'">
+            time
+          </div>
+          <div class="home">{{ i.sport_event.competitors[0].name }}</div>
+          <div class="home-score">
+            {{ i.sport_event_status.period_scores[0].home_score }}
+            <span>({{ i.sport_event_status.home_score }})</span>
+          </div>
+          <div class="away">{{ i.sport_event.competitors[1].name }}</div>
           <div class="away-score">
-            {{i.sport_event_status.period_scores[0].away_score}}
-            <span>({{i.sport_event_status.away_score}})</span>
+            {{ i.sport_event_status.period_scores[0].away_score }}
+            <span>({{ i.sport_event_status.away_score }})</span>
           </div>
         </div>
       </Slide>
@@ -46,10 +55,9 @@ export default {
         const data = res.data;
 
         this.match = data;
-        console.log(this.match);
+
         this.loading = false;
       } catch (err) {
-        console.log(err);
         this.loading = false;
       }
     },

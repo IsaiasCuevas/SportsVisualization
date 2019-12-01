@@ -145,7 +145,6 @@ export default {
         );
         this.data = data.data.result;
         this.loading = false;
-        console.log(this.data);
       } catch (err) {
         this.loading = false;
       }
@@ -162,7 +161,6 @@ export default {
       );
       this.data = data.data.result;
 
-      console.log(this.data);
       this.loading = false;
     } catch (err) {
       this.loading = false;
