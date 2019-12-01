@@ -12,6 +12,7 @@ const app = express();
 
 //Routes
 app.use("/api/soccer/", require("./routes/soccer"));
+app.use("/api/esports/", require("./routes/esports"));
 
 //start express server on port provided.
 app.listen(port, console.log(`Server is running on port ${port}`));

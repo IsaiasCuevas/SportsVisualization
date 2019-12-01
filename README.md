@@ -6,6 +6,7 @@ Contributors: Isaias Cuevas
 
 ## Local Deployment
 
+
 Create a config.env file with all required API keys and make sure it is in the main directory
 
 
@@ -20,3 +21,4 @@ npm run client - Runs only client (frontend)
 npm run dev - Concurrently starts front and back end
 
 ```
+

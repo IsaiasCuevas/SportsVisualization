@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header class="header" v-bind:title="'Sports Visualization'" />
     <router-view />
   </div>
 </template>
@@ -17,7 +17,19 @@ export default {
 </script>
 
 <style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --accent-color: #641bff;
+  --heading-font-family: "Poppins", sans-serif;
+  --body-font-family: "Lato", sans-serif;
+}
 body {
-  background-color: antiquewhite;
+  margin: 0;
+  background-color: #ffffff;
 }
 </style>
