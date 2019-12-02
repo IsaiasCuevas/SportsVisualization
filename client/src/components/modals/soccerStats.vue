@@ -16,12 +16,14 @@
   >
     <MatchHeader v-bind:stats="stats" />
     <MatchContent v-bind:stats="stats" />
-    <a
-      v-if="stats.event_ft_result != null"
-      v-bind:href="'/soccer/match/' + stats.event_key"
-      class="modal-button"
-      >Detailed Information</a
-    >
+    <div class="button-container">
+      <a
+        v-if="stats.event_ft_result != null"
+        v-bind:href="'/soccer/match/' + stats.event_key"
+        class="modal-button"
+        >Detailed Information</a
+      >
+    </div>
   </modal>
 </template>
 <script>
@@ -51,6 +53,10 @@ export default {
 }
 .v--modal-overlay[data-modal="size-modal"] {
   background: rgba(0, 0, 0, 0.45);
+}
+.button-container {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 .demo-modal-class {
   border-radius: 10px;

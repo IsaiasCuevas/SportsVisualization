@@ -13,6 +13,14 @@ const app = express();
 //Routes
 app.use("/api/soccer/", require("./routes/soccer"));
 app.use("/api/esports/", require("./routes/esports"));
+app.use("/api/basketball/", require("./routes/basketball"));
+
+//Handle production
+//Set static folder
+app.use(express.static(__dirname + "/public/"));
+
+//Handle Single page application
+app.get(/.*/, (req, res) => res.sendFile(__dirname + "/public/index.html"));
 
 //start express server on port provided.
 app.listen(port, console.log(`Server is running on port ${port}`));

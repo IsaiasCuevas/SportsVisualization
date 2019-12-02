@@ -4,6 +4,7 @@
   "description": "A Node.js and Vue.js web application for sports visualization",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run serve --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""

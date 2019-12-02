@@ -6,8 +6,8 @@
         <div class="home-card-stats">
           <div class="player_image">
             <img
-              v-bind:src="
-                'https:/ls.sportradar.com/ls/players/eslsmall/' +
+              :src="
+                'https://ls.sportradar.com/ls/players/eslsmall/' +
                   hplayer_id +
                   '.png'
               "
@@ -56,8 +56,8 @@
         <div class="away-card-stats">
           <div class="player_image">
             <img
-              v-bind:src="
-                'https:/ls.sportradar.com/ls/players/eslsmall/' +
+              :src="
+                'https://ls.sportradar.com/ls/players/eslsmall/' +
                   aplayer_id +
                   '.png'
               "

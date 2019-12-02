@@ -106,7 +106,7 @@
               v-on:click="setTeam1Player(player)"
             >
               <div>{{ player.nickname }}</div>
-              <div><img v-bind:src="getPlayerPicture(player.id)" /></div>
+              <div><img :src="getPlayerPicture(player.id)" /></div>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@
               v-on:click="setTeam2Player(player)"
             >
               <div>{{ player.nickname }}</div>
-              <div><img v-bind:src="getPlayerPicture(player.id)" /></div>
+              <div><img :src="getPlayerPicture(player.id)" /></div>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@
             <md-card-media md-medium>
               <img
                 style="height:125px; width:100px;"
-                v-bind:src="getPlayerPicture(team1currentplayer.id)"
+                :src="getPlayerPicture(team1currentplayer.id)"
               />
             </md-card-media>
           </md-card-header>
@@ -236,7 +236,7 @@
             <md-card-media md-medium>
               <img
                 style="height:125px; width:100px;"
-                v-bind:src="getPlayerPicture(team2currentplayer.id)"
+                :src="getPlayerPicture(team2currentplayer.id)"
               />
             </md-card-media>
           </md-card-header>
@@ -298,7 +298,7 @@ export default {
     getPlayerPicture: function(id) {
       const idArr = id.split(":");
       return (
-        "https:/ls.sportradar.com/ls/players/eslsmall/" + idArr[2] + ".png"
+        "https://ls.sportradar.com/ls/players/eslsmall/" + idArr[2] + ".png"
       );
     },
     getTeamPicture: function(id) {

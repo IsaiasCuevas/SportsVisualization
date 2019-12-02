@@ -11,7 +11,16 @@
 </template>
 
 <script>
-import { TimelineLite, Back, Linear } from "gsap";
+import {
+  TweenMax,
+  TimelineLite,
+  Back,
+  Linear,
+  gsap,
+  CSSPlugin
+} from "gsap/all";
+const dontTreeShakeCSS = [TweenMax, CSSPlugin];
+
 export default {
   name: "Home",
   data() {
@@ -25,7 +34,7 @@ export default {
     const subtitle2 = this.$refs.subtitle2;
     const subtitle3 = this.$refs.subtitle3;
 
-    const breathe = new TimelineLite({ onComplete: fadeIn });
+    const breathe = new TimelineLite({ onComplete: fadeIn, yoyo: true });
     const timelines = new TimelineLite({
       onComplete: breathe
     });
@@ -41,51 +50,62 @@ export default {
       ease: Back.easeInOut,
       fontSize: 180
     });
-    timelines.to(
-      title,
-      1,
-      {
+    timelines
+      .to(title, 1, {
         ease: Back.easeInOut,
-        rotation: 360
-      },
-      "-=0.8"
-    );
-    breathe.to(title, 1, {
-      opacity: 1,
-      scale: 1.05,
-      ease: Linear.easeNone,
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.25
-    });
-    breathe.to(subtitle1, 1, {
-      opacity: 1,
-      scale: 1.05,
-      ease: Linear.easeNone,
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.25
-    });
-    breathe.to(subtitle2, 1, {
-      opacity: 1,
-      scale: 1.05,
-      ease: Linear.easeNone,
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.25
-    });
-    breathe.to(subtitle3, 1, {
-      opacity: 1,
-      scale: 1.05,
-      ease: Linear.easeNone,
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.25
-    });
+        fontSize: 20
+      })
+      .to(title, 0.5, {
+        ease: Back.easeInOut,
+        fontSize: 150
+      })
+      .to(
+        title,
+        1,
+        {
+          ease: Back.easeInOut,
+          rotation: 360
+        },
+        "-=0.8"
+      );
+    breathe
+      .to(title, 1, {
+        opacity: 1,
+        scale: 1.05,
+        ease: Linear.easeNone,
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 0.25
+      })
+      .to(subtitle1, 1, {
+        opacity: 1,
+        scale: 1.05,
+        ease: Linear.easeNone,
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 0.25
+      })
+      .to(subtitle2, 1, {
+        opacity: 1,
+        scale: 1.05,
+        ease: Linear.easeNone,
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 0.25
+      })
+      .to(subtitle3, 1, {
+        opacity: 1,
+        scale: 1.05,
+        ease: Linear.easeNone,
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 0.25
+      });
 
-    fadeIn.to(subtitle1, 1, { y: -20, opacity: 1 });
-    fadeIn.to(subtitle2, 1, { y: -30, opacity: 1 }, "-=.8");
-    fadeIn.to(subtitle3, 1, { y: -40, opacity: 1 }, "-=.5");
+    fadeIn
+      .to(subtitle1, 1, { y: -20, opacity: 1 })
+      .to(subtitle2, 1, { y: -30, opacity: 1 }, "-=.8")
+      .to(subtitle3, 1, { y: -40, opacity: 1 }, "-=.5");
   }
 };
 </script>
